@@ -8,11 +8,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
+import { CalendarViewMenuComponent } from './calendar-view-menu/calendar-view-menu.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CalendarViewMenuComponent
   ],
   imports: [
     BrowserModule,

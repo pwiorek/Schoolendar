@@ -1,0 +1,38 @@
+$bg: #3e52b5;
+$fg: lighten($bg,40%);
+$borderWidth: 1px;
+
+body {
+  background: $bg;
+  font-family: roboto;
+}
+
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+label {
+  color: $bg;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 5px 20px;
+}
+
+input[type=radio]:checked + label{
+  color: $bg;
+  background: $fg;
+}
+
+label + input[type=radio] + label {
+  border-left: solid $borderWidth $fg;
+}
+.radio-group {
+  border: solid $borderWidth rgb(88, 88, 88);
+  display: inline-block;
+  margin: 20px;
+  border-radius: 3px;
+  overflow: hidden;
+}

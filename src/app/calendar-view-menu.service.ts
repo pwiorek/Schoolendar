@@ -3,14 +3,20 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class CallendarViewMenuService {
+export class CalendarViewMenuService {
   readonly defaultView: string = "weekView";
   lastView: string = this.get("lastView") || this.defaultView;
+  view: string = this.lastView || this.defaultView;
 
   constructor() { }
 
   saveView(view: string): void {
     this.set("lastView", view);
+  }
+
+  setView(view: string): void {
+    this.view = view;
+    this.saveView(view);
   }
 
   set(key: string, data: any): void {
