@@ -1,0 +1,17 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    padding: 40px;
+    border: solid black 2px;
+}
+
+.item {
+    border: solid black 1px;
+    text-align: center;
+    background-color: #f4f4f4
+}
+
+#date {
+    background-color: white;
+}
