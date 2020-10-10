@@ -16,7 +16,11 @@ export class DateHandlerService {
 
   getNextDays(referenceDate: Date, num: number): Date[] {
     var listOfDays: Date[] = [];
-    
-    return 
+
+    for(var i = 0; i < num; i++) 
+      listOfDays.push(new Date(referenceDate.setDate(referenceDate.getDate() + 1)));
+  
+    return listOfDays;
   }
+
 }
