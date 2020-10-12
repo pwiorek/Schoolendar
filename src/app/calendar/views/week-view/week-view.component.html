@@ -1,11 +1,17 @@
 <div class='container'>
     <div class='grid-container'>
-        <div class='item' id='date' *ngFor='let day of days'>
-            <h3>21</h3>
-            <p>{{ day }}</p>
+        <div class='column-container constant hours-container '>
+            <div class='block-container constant'></div>
+            <div class='block-container constant hour' *ngFor='let hour of hours'>
+                {{ hour }}
+            </div>
         </div>
-        <div class='item' *ngFor='let numbers of numbers'>
-            <p>siemanko</p>
+        <div class='column-container date-container' id='day{{date.getDay()}}' style='border: 1px solid black' *ngFor='let date of days'>
+            <div class='block-container constant'>
+                <h3>{{ date | date: 'dd' }}</h3>
+                <p>{{ date | date: 'EEEE'}}</p>
+            </div>
+            <div class='block-container' *ngFor='let hour of hours'></div>
         </div>
     </div>
 </div>

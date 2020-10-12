@@ -7,17 +7,21 @@ import { DateHandlerService } from 'src/app/services/date-handler.service';
   styleUrls: ['./week-view.component.scss']
 })
 export class WeekViewComponent implements OnInit {
-  numbers: number[] = [];
-  days: string[] = ['Pon', 'Wt', 'Sr', 'Czw', 'Pt']; // <- to na obiekty (albo daty)
+  days: Date[] = [];
+  hours = ['7:10 - 7:55', '8:00 - 8:45', '9:50 - 10:35', '10:40 - 11:25', '11:30 - 12:15', '12:30 - 13:15',
+    '13:20 - 14:05', '14:10 - 14:55']
 
   constructor(
     private dateHandler: DateHandlerService,
-  ) {
-    this.numbers = Array(30).fill(0).map((x,i)=>i);
-   }
+  ) {}
 
   ngOnInit(): void {
-    alert(this.dateHandler.getNextDays(new Date(), 7))
+    this.markCurrentDay();
+    this.days = this.dateHandler.getWeek(new Date());
   }
 
+  markCurrentDay() {
+    var today = new Date().getDay();
+    // document.getElementById('day'+ today).style.border = '1px solid green';
+  }
 }
