@@ -14,7 +14,8 @@ import { CalendarViewMenuComponent } from './calendar-view-menu/calendar-view-me
 @NgModule({
   declarations: [
     AppComponent,
-    CalendarViewMenuComponent
+    CalendarViewMenuComponent,
+    
   ],
   imports: [
     BrowserModule,
