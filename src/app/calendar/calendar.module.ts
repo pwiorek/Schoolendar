@@ -11,7 +11,7 @@ import { TimePeriodControlerComponent } from './components/time-period-controler
   ],
   exports: [
     WeekViewComponent,
-    TimePeriodControlerComponent,
+    TimePeriodControlerComponent
   ]
 })
 export class CalendarModule { }

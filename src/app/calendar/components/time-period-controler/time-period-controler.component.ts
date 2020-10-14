@@ -15,6 +15,7 @@ export class TimePeriodControlerComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentWeek = this.dateHandler.currentWeek;
+    // this.xd()
   }
 
   xd() {

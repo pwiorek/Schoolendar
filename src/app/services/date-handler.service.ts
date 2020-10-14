@@ -1,16 +1,14 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DateHandlerService implements OnInit{
+export class DateHandlerService {
   currentWeek: Date[] = [];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
     this.currentWeek = this.getWeek(new Date());
-  }
+   }
 
   getWeek(referenceDate: Date): Date[] {
     var listOfDays: Date[] = [];
