@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
+import { View } from './viewEnum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CalendarViewMenuService {
-  readonly defaultView: string = "weekView";
-  lastView: string = this.get("lastView") || this.defaultView;
+  readonly defaultView: string = View.week;
+  readonly viewStorageKey = 'lastView';
+  lastView: string = this.get(this.viewStorageKey) || this.defaultView;
   view: string = this.lastView || this.defaultView;
 
   constructor() { }
 
   saveView(view: string): void {
-    this.set("lastView", view);
+    this.set(this.viewStorageKey, view);
   }
 
   setView(view: string): void {

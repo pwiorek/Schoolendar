@@ -1,8 +1,8 @@
     <div class="radio-group" >
-        <input type="radio" id="day" name="view" value="dayView" (click)="changeView()">
+        <input type="radio" id="day" name="view" (click)="changeView('day')"  [checked]="calendarViewMenuService.lastView === 'day'">
         <label for="day">DAY</label>
-        <input type="radio" id="week" name="view" value="weekView" (click)="changeView()">
+        <input type="radio" id="week" name="view" (click)="changeView('week')" [checked]="calendarViewMenuService.lastView === 'week'">
         <label for="week">WEEK</label>
-        <input type="radio" id="month" name="view" value="monthView" (click)="changeView()">
+        <input type="radio" id="month" name="view" (click)="changeView('month')" [checked]="calendarViewMenuService.lastView === 'month'">
         <label for="month">MONTH</label>
     </div>

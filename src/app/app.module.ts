@@ -15,7 +15,6 @@ import { CalendarViewMenuComponent } from './calendar-view-menu/calendar-view-me
   declarations: [
     AppComponent,
     CalendarViewMenuComponent,
-    
   ],
   imports: [
     BrowserModule,
