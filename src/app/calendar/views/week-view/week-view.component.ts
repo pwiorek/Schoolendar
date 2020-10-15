@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DateHandlerService } from 'src/app/services/date-handler.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-week-view',
@@ -12,13 +13,17 @@ export class WeekViewComponent implements OnInit {
     '13:20 - 14:05', '14:10 - 14:55']; //in future from database
   today = new Date();
   dayFormat = 'EEEE';
+  isSmallScreen = false;
 
   constructor(
     private dateHandler: DateHandlerService,
-  ) {}
+    private breakpointObserver: BreakpointObserver,
+  ) {
+    this.isSmallScreen = breakpointObserver.isMatched('(max-width: 560px)');
+  }
 
   ngOnInit(): void {
     this.days = this.dateHandler.getWeek(this.today);
-    if(window.innerWidth < 560) this.dayFormat = 'E'; 
+    if(this.isSmallScreen) this.dayFormat = 'E'; 
   }  
 }

@@ -1,5 +1,6 @@
-<div class='container'>
-    <span class="material-icons arrow" (click)='xd()'>chevron_left</span>
-    <p>{{ currentWeek[0] | date: 'LLLL' }} {{ currentWeek[0] | date: 'dd' }} - {{ currentWeek[4] | date: 'dd' }}</p>
-    <span class="material-icons arrow">chevron_right</span>
+<div class="container">
+    <!-- na buttonach beda clicki -->
+    <button class="material-icons arrow">chevron_left</button>
+    <p>{{ currentWeek[0] | date: "LLLL" }} {{ currentWeek[0] | date: "dd" }} - {{ currentWeek[4] | date: "dd" }}</p>
+    <button class="material-icons arrow">chevron_right</button>
 </div>

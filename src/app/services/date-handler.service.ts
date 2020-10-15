@@ -11,17 +11,17 @@ export class DateHandlerService {
    }
 
   getWeek(referenceDate: Date): Date[] {
-    var listOfDays: Date[] = [];
-    var monday = new Date();
+    let listOfDays: Date[] = [];
+    let day = new Date();
 
     // get date of Monday
-    if(referenceDate.getDay() >= 1) monday.setDate(referenceDate.getDate() - (referenceDate.getDay() - 1));
-    else monday.setDate(referenceDate.getDate() - 6);
+    if(referenceDate.getDay() >= 1) day.setDate(referenceDate.getDate() - (referenceDate.getDay() - 1));
+    else day.setDate(referenceDate.getDate() - 6);
 
-    for(var i = 0; i < 5; i++) {
-      listOfDays.push(monday);
-      monday = new Date(monday);
-      monday.setDate(monday.getDate() + 1);
+    for(let i = 0; i < 5; i++) {
+      listOfDays.push(day);
+      day = new Date(day);
+      day.setDate(day.getDate() + 1);
     }
 
     return listOfDays;
