@@ -1,0 +1,15 @@
+<section class="grid-container">
+    <article class="column-container constant hours-container">
+        <li class="block-container constant"></li>
+        <li class="block-container constant hour" *ngFor="let hour of hours">
+            <p>{{ hour }}</p>
+        </li>
+    </article>
+    <article class="column-container date-container" [class.today]="date.getFullYear() === today.getFullYear() && date.getMonth() === today.getMonth() && date.getDate() === today.getDate()" *ngFor="let date of days">
+        <div class="block-container constant">
+            <h3>{{ date | date: "dd" }}</h3>
+            <p>{{ date | date: dayFormat }}</p>
+        </div>
+        <div class="block-container" *ngFor="let hour of hours"></div>
+    </article>
+</section>
