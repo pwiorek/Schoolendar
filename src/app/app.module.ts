@@ -7,15 +7,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from './calendar/calendar.module';
 import { DatePipe } from '@angular/common';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
+import { CalendarViewMenuComponent } from './calendar-view-menu/calendar-view-menu.component';
+
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CalendarViewMenuComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CalendarModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
