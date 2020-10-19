@@ -9,6 +9,7 @@ import { CalendarViewMenuComponent } from './calendar/components/calendar-view-m
 import { WeekViewComponent } from './calendar/views/week-view/week-view.component';
 import { DayViewComponent } from './calendar/views/day-view/day-view.component';
 import { MonthViewComponent } from './calendar/views/month-view/month-view.component';
+import { HomeComponent } from './calendar/home/home.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { MonthViewComponent } from './calendar/views/month-view/month-view.compo
     CalendarViewMenuComponent,
     WeekViewComponent,
     DayViewComponent,
-    MonthViewComponent
+    MonthViewComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
