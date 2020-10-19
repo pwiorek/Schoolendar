@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { View } from './viewEnum';
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,12 @@ export class CalendarViewMenuService {
   lastView: string = this.get(this.viewStorageKey) || this.defaultView;
   view: string = this.lastView || this.defaultView;
 
-  constructor() { }
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly router: Router
+  ) {
+    this.router.navigateByUrl("home/" + this.view);
+   }
 
   saveView(view: string): void {
     this.set(this.viewStorageKey, view);

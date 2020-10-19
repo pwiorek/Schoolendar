@@ -4,19 +4,22 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CalendarModule } from './calendar/calendar.module';
 import { DatePipe } from '@angular/common';
-
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { environment } from '../environments/environment';
-import { CalendarViewMenuComponent } from './calendar-view-menu/calendar-view-menu.component';
+import { CalendarViewMenuComponent } from './calendar/components/calendar-view-menu/calendar-view-menu.component';
+import { WeekViewComponent } from './calendar/views/week-view/week-view.component';
+import { DayViewComponent } from './calendar/views/day-view/day-view.component';
+import { MonthViewComponent } from './calendar/views/month-view/month-view.component';
+import { HomeComponent } from './calendar/home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CalendarViewMenuComponent,
+    WeekViewComponent,
+    DayViewComponent,
+    MonthViewComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

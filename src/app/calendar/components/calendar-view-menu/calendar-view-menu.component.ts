@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CalendarViewMenuService } from '../calendar-view-menu.service';
+import { CalendarViewMenuService } from '../../services/calendar-view-menu.service';
 import { ActivatedRoute, Router } from "@angular/router";
-import { View } from '../viewEnum';
-import { ViewFlags } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-calendar-view-menu',
