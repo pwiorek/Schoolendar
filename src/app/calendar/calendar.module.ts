@@ -13,6 +13,8 @@ import { MonthViewComponent } from './views/month-view/month-view.component';
   ],
   exports: [
     WeekViewComponent,
+    DayViewComponent,
+    MonthViewComponent,
     TimePeriodControlerComponent
   ]
 })
