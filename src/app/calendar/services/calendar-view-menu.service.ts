@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { View } from './viewEnum';
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,6 @@ export class CalendarViewMenuService {
   view: string = this.lastView || this.defaultView;
 
   constructor(
-    private readonly route: ActivatedRoute,
     private readonly router: Router
   ) {
     this.router.navigateByUrl("home/" + this.view);
