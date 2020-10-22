@@ -10,7 +10,7 @@ import { WeekViewComponent } from './calendar/views/week-view/week-view.componen
 import { DayViewComponent } from './calendar/views/day-view/day-view.component';
 import { MonthViewComponent } from './calendar/views/month-view/month-view.component';
 import { HomeComponent } from './calendar/home/home.component';
-import { AddEventComponent, DialogOverviewExampleDialog } from './calendar/components/add-event/add-event.component';
+import { AddEventComponent, AddEventDialog } from './calendar/components/add-event/add-event.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -27,7 +27,7 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
     MonthViewComponent,
     HomeComponent,
     AddEventComponent,
-    DialogOverviewExampleDialog
+    AddEventDialog
   ],
   imports: [
     BrowserModule,
@@ -43,7 +43,7 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
   providers: [DatePipe],
   bootstrap: [AppComponent],
   entryComponents: [
-    DialogOverviewExampleDialog
+    AddEventDialog
   ],
 })
 export class AppModule { }

@@ -33,8 +33,7 @@ export class AddEventComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '500px',
+    const dialogRef = this.dialog.open(AddEventDialog, {
       data: { name: "" }
     });
 
@@ -47,16 +46,17 @@ export class AddEventComponent implements OnInit {
 }
 
 @Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: 'dialog-overview-example-dialog.html',
+  selector: 'add-event-dialog',
+  templateUrl: 'add-event-dialog.html',
+  styleUrls: ['./add-event.component.scss']
 })
-export class DialogOverviewExampleDialog {
+export class AddEventDialog {
 
   nameFormControl = new FormControl('', [
     Validators.required,
   ]);
   constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    public dialogRef: MatDialogRef<AddEventDialog>,
     @Inject(MAT_DIALOG_DATA) public data: Event) { }
 
   onNoClick(): void {
