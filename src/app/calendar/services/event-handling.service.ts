@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as firebase from 'firebase';
 import { Event } from './event';
 
 @Injectable({
@@ -6,12 +7,16 @@ import { Event } from './event';
 })
 export class EventHandlingService {
   events: Event[] = this.get("events") || [];
+  database = firebase.database();
 
   constructor() { }
 
   addEvent(event: Event) {
     this.events.push(event);
     this.set("events", this.events);
+    this.database.ref('events/' + event.name).set({
+      name: event.name
+    });
   }
 
   set(key: string, data: any): void {

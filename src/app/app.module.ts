@@ -17,6 +17,23 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 
+import * as firebase from 'firebase/app';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+
+var firebaseConfig = {
+  apiKey: "AIzaSyD3ndHKvEoiUKOYxDt1b_D-z-yPR4TXMIM",
+  authDomain: "schoolendardrac-48fb1.firebaseapp.com",
+  databaseURL: "https://schoolendardrac-48fb1.firebaseio.com",
+  projectId: "schoolendardrac-48fb1",
+  storageBucket: "schoolendardrac-48fb1.appspot.com",
+  messagingSenderId: "809888163028",
+  appId: "1:809888163028:web:881f9fa8e95707b0f30741",
+  measurementId: "G-Z7B7TMHP41"
+};
+firebase.initializeApp(firebaseConfig);
 
 @NgModule({
   declarations: [
@@ -38,7 +55,10 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
     MatDialogModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule, // database
+    AngularFireAuthModule, // auth
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
