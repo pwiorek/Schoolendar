@@ -11,6 +11,7 @@ import { DayViewComponent } from './calendar/components/views/day-view/day-view.
 import { MonthViewComponent } from './calendar/components/views/month-view/month-view.component';
 import { HomeComponent } from './calendar/home/home.component';
 import { TodayButtonComponent } from './calendar/components/today-button/today-button.component';
+import { MaterialModule } from './material.module';
 
 
 @NgModule({
@@ -21,12 +22,13 @@ import { TodayButtonComponent } from './calendar/components/today-button/today-b
     DayViewComponent,
     MonthViewComponent,
     HomeComponent,
-    TodayButtonComponent
+    TodayButtonComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
