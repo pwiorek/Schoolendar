@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WeekViewComponent } from './views/week-view/week-view.component';
+import { WeekViewComponent } from './components/views/week-view/week-view.component';
 import { TimePeriodControlerComponent } from './components/time-period-controler/time-period-controler.component';
-import { DayViewComponent } from './views/day-view/day-view.component';
-import { MonthViewComponent } from './views/month-view/month-view.component';
+import { DayViewComponent } from './components/views/day-view/day-view.component';
+import { MonthViewComponent } from './components/views/month-view/month-view.component';
 import { HomeComponent } from './home/home.component';
+import { TodayButtonComponent } from './components/today-button/today-button.component';
 
 
 @NgModule({
-  declarations: [WeekViewComponent, TimePeriodControlerComponent, DayViewComponent, MonthViewComponent, HomeComponent],
+  declarations: [WeekViewComponent, TimePeriodControlerComponent, DayViewComponent, MonthViewComponent, HomeComponent, TodayButtonComponent],
   imports: [
     CommonModule
   ],
@@ -16,7 +17,8 @@ import { HomeComponent } from './home/home.component';
     WeekViewComponent,
     DayViewComponent,
     MonthViewComponent,
-    TimePeriodControlerComponent
+    TimePeriodControlerComponent,
+    TodayButtonComponent,
   ]
 })
 export class CalendarModule { }

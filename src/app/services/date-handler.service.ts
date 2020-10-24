@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DateHandlerService {
   currentWeek: Date[] = [];
-
+  currentWeekChange: Subject<Date[]> = new Subject<Date[]>();
+  
+  
   constructor() {
-    this.currentWeek = this.getWeek(new Date());
+    this.setWeek(new Date());
    }
 
-  getWeek(referenceDate: Date): Date[] {
+   setWeek(referenceDate: Date) {
     let listOfDays: Date[] = [];
     let day = new Date();
 
@@ -24,6 +27,7 @@ export class DateHandlerService {
       day.setDate(day.getDate() + 1);
     }
 
-    return listOfDays;
+    this.currentWeek = listOfDays;
+    this.currentWeekChange.next(this.currentWeek);
   }
 }

@@ -10,6 +10,7 @@ import { WeekViewComponent } from './calendar/components/views/week-view/week-vi
 import { DayViewComponent } from './calendar/components/views/day-view/day-view.component';
 import { MonthViewComponent } from './calendar/components/views/month-view/month-view.component';
 import { HomeComponent } from './calendar/home/home.component';
+import { TodayButtonComponent } from './calendar/components/today-button/today-button.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HomeComponent } from './calendar/home/home.component';
     WeekViewComponent,
     DayViewComponent,
     MonthViewComponent,
-    HomeComponent
+    HomeComponent,
+    TodayButtonComponent
   ],
   imports: [
     BrowserModule,
