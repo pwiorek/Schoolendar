@@ -13,7 +13,6 @@ export class EventHandlingService {
 
   addEvent(event: Event) {
     this.events.push(event);
-    this.set("events", this.events);
     this.database.ref('events/' + event.name).set({
       name: event.name
     });

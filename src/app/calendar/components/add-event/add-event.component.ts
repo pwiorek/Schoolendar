@@ -4,6 +4,8 @@ import { Event } from '../../services/event';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { AddEventDialog } from './add-event-dialog';
+import { Subscription } from 'rxjs';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -18,7 +20,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./add-event.component.scss']
 })
 export class AddEventComponent implements OnInit {
-
+  private subscription: Subscription;
 
   constructor(
     private eventHandlingService: EventHandlingService,
@@ -26,6 +28,10 @@ export class AddEventComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   addEvent(name: string) {
@@ -37,30 +43,14 @@ export class AddEventComponent implements OnInit {
       data: { name: "" }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    this.subscription = dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      result ? this.addEvent(result) : alert("Minimalna długość nazwy to 1 znak");
+      if (result)
+        this.addEvent(result)
+
     });
+
   }
 
 }
 
-@Component({
-  selector: 'add-event-dialog',
-  templateUrl: 'add-event-dialog.html',
-  styleUrls: ['./add-event.component.scss']
-})
-export class AddEventDialog {
-
-  nameFormControl = new FormControl('', [
-    Validators.required,
-  ]);
-  constructor(
-    public dialogRef: MatDialogRef<AddEventDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: Event) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}

@@ -3,10 +3,11 @@
     <div mat-dialog-content class="add-event-dialog-content" id="mat-dialog-content">
         <mat-form-field appearance="fill">
             <mat-label>Nazwa</mat-label>
-            <input matInput [(ngModel)]="data.name" required minlength="1" maxlength="30" id="matInput">
+            <input matInput cdkFocusInitial [(ngModel)]="data.name" minlength="1" maxlength="30" id="matInput" required>
         </mat-form-field>
     </div>
     <div mat-dialog-actions class="add-event-dialog-content" id="mat-dialog-actions">
-        <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial class="add-event-button" id="mat-button">DODAJ EVENT</button>
+        <button mat-button [mat-dialog-close]="data.name"  class="add-event-button" id="mat-button" [disabled]="data.name === ''">DODAJ
+            EVENT</button>
     </div>
 </div>
