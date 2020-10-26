@@ -12,7 +12,8 @@ import { MonthViewComponent } from './calendar/components/views/month-view/month
 import { HomeComponent } from './calendar/home/home.component';
 import { TodayButtonComponent } from './calendar/components/today-button/today-button.component';
 import { MaterialModule } from './material.module';
-
+import { TimePeriodControlerComponent } from './calendar/components/time-period-controler/time-period-controler.component';
+import { HammerModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -23,12 +24,14 @@ import { MaterialModule } from './material.module';
     MonthViewComponent,
     HomeComponent,
     TodayButtonComponent,
+    TimePeriodControlerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    HammerModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

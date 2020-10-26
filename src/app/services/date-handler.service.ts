@@ -17,9 +17,12 @@ export class DateHandlerService {
     let listOfDays: Date[] = [];
     let day = new Date();
 
+    console.log(referenceDate)
+
     // get date of Monday
-    if(referenceDate.getDay() >= 1) day.setDate(referenceDate.getDate() - (referenceDate.getDay() - 1));
-    else day.setDate(referenceDate.getDate() - 6);
+    if(referenceDate.getDay() >= 1) day.setDate(referenceDate.getDate() - (referenceDate.getDay() - 1)); //pon-sob
+    else day.setDate(referenceDate.getDate() - 6); 
+
 
     for(let i = 0; i < 5; i++) {
       listOfDays.push(day);
@@ -28,6 +31,19 @@ export class DateHandlerService {
     }
 
     this.currentWeek = listOfDays;
+    console.log(this.currentWeek);
     this.currentWeekChange.next(this.currentWeek);
+  }
+
+  moveForwards( num: number) {
+    let day = new Date(this.currentWeek[0]);
+    day.setDate(day.getDate() + num);
+    this.setWeek(day);
+  }
+
+  moveBackwards(num: number) {
+    let day = new Date(this.currentWeek[0]);
+    day.setDate(day.getDate() - num);
+    this.setWeek(day);
   }
 }

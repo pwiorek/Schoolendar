@@ -5,12 +5,22 @@
     justify-content: center;
 }
 
-p {
-    margin: 0;
-    height: 24px;
+.arrow {
+    border: none;
+    background-color: inherit;
+    transition: transform 1s;
 }
 
-.arrow {
-    height: 24px;
+.left:hover {
     cursor: pointer;
+    transform: translateX(-4px);
+}
+
+.right:hover {
+    cursor: pointer;
+    transform: translateX(4px);
+}
+
+.arrow:focus {
+    outline: 0;
 }

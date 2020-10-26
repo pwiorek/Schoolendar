@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-week-view',
@@ -14,7 +15,7 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   today = new Date();
   dayFormat = 'EEEE';
   isSmallScreen = false;
-  _subscription: any;
+  private subscription: Subscription
 
   constructor(
     private dateHandler: DateHandlerService,
@@ -22,7 +23,7 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   ) {
     this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
     this.days = this.dateHandler.currentWeek;
-    this._subscription = dateHandler.currentWeekChange.subscribe(value => this.days = value);
+    this.subscription = dateHandler.currentWeekChange.subscribe(value => this.days = value);
   }
 
   ngOnInit(): void {
@@ -30,6 +31,11 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   }  
 
   ngOnDestroy() {
-    this._subscription.unsubscribe();
+    this.subscription.unsubscribe();
+  }
+
+  handleSwipe(side: string) {
+    if (side == 'left') this.dateHandler.moveForwards(7);
+    else if (side == 'right') this.dateHandler.moveBackwards(7);
   }
 }
