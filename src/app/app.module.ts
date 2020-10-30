@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePipe } from '@angular/common';
 import { CalendarViewMenuComponent } from './calendar/components/calendar-view-menu/calendar-view-menu.component';
-import { WeekViewComponent } from './calendar/views/week-view/week-view.component';
-import { DayViewComponent } from './calendar/views/day-view/day-view.component';
-import { MonthViewComponent } from './calendar/views/month-view/month-view.component';
+import { WeekViewComponent } from './calendar/components/views/week-view/week-view.component';
+import { DayViewComponent } from './calendar/components/views/day-view/day-view.component';
+import { MonthViewComponent } from './calendar/components/views/month-view/month-view.component';
 import { HomeComponent } from './calendar/home/home.component';
+import { TodayButtonComponent } from './calendar/components/today-button/today-button.component';
+import { MaterialModule } from './material.module';
 
 
 @NgModule({
@@ -19,12 +21,14 @@ import { HomeComponent } from './calendar/home/home.component';
     WeekViewComponent,
     DayViewComponent,
     MonthViewComponent,
-    HomeComponent
+    HomeComponent,
+    TodayButtonComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
