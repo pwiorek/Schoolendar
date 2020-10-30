@@ -43,7 +43,7 @@ export class AddEventComponent implements OnInit {
       data: { name: "" },
       maxWidth: '100vw',
       maxHeight: '80vh',
-      panelClass: 'add-event-dialog-panelClass',
+      panelClass: 'add-event-dialog-panelClass'
     });
 
     this.subscription = dialogRef.afterClosed().subscribe(result => {
