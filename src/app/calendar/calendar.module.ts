@@ -5,11 +5,12 @@ import { TimePeriodControlerComponent } from './components/time-period-controler
 import { DayViewComponent } from './components/views/day-view/day-view.component';
 import { MonthViewComponent } from './components/views/month-view/month-view.component';
 import { HomeComponent } from './home/home.component';
+import { AddEventComponent } from './components/add-event/add-event.component';
 import { TodayButtonComponent } from './components/today-button/today-button.component';
 
 
 @NgModule({
-  declarations: [WeekViewComponent, TimePeriodControlerComponent, DayViewComponent, MonthViewComponent, HomeComponent, TodayButtonComponent],
+  declarations: [WeekViewComponent, TimePeriodControlerComponent, DayViewComponent, MonthViewComponent, HomeComponent, AddEventComponent, TodayButtonComponent],
   imports: [
     CommonModule
   ],
