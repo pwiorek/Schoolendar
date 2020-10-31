@@ -48,7 +48,7 @@ firebase.initializeApp(firebaseConfig);
     MonthViewComponent,
     HomeComponent,
     AddEventComponent,
-    AddEventDialog
+    AddEventDialog,
     TodayButtonComponent,
   ],
   imports: [
