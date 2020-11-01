@@ -6,32 +6,30 @@ import { Event } from './event';
   providedIn: 'root'
 })
 export class EventHandlingService {
-  events: Event[] = this.get("events") || [];
+  events: Event[];
   database = firebase.database();
 
-  constructor() { }
-
+  constructor() {
+    this.events = this.fetchEvents(this.database.ref('events'));
+    console.log(this.events);
+  }
   addEvent(event: Event) {
-    this.events.push(event);
-    this.database.ref('events/' + event.name).set({
-      name: event.name
+    var eventsListRef = this.database.ref('events');
+    var newEventRef = eventsListRef.push();
+    newEventRef.set({
+      name: event.name,
     });
+    this.events = this.fetchEvents(eventsListRef);
   }
 
-  set(key: string, data: any): void {
-    try {
-      localStorage.setItem(key, JSON.stringify(data));
-    } catch (e) {
-      console.error('Error saving to localStorage', e);
-    }
+  fetchEvents(eventsListRef: firebase.database.Reference): Event[] {
+    var eventsArray: Event[] = new Array;
+    eventsListRef.once('value').then(function (snapshot) {
+      snapshot.forEach(function (childSnapshot) {
+        eventsArray.push(childSnapshot.val())
+      })
+    })
+    return eventsArray;
   }
 
-  get(key: string) {
-    try {
-      return JSON.parse(localStorage.getItem(key));
-    } catch (e) {
-      console.error('Error getting data from localStorage', e);
-      return null;
-    }
-  }
 }
