@@ -6,30 +6,36 @@ import { Event } from './event';
   providedIn: 'root'
 })
 export class EventHandlingService {
-  events: Event[];
+  events: Event[] = [];
   database = firebase.database();
+  eventsListRef = this.database.ref('events');
 
   constructor() {
-    this.events = this.fetchEvents(this.database.ref('events'));
-    console.log(this.events);
+    this.loadEvents().then(events => console.log(events));     
   }
+  
   addEvent(event: Event) {
-    var eventsListRef = this.database.ref('events');
-    var newEventRef = eventsListRef.push();
+    var newEventRef = this.eventsListRef.push();
     newEventRef.set({
       name: event.name,
     });
-    this.events = this.fetchEvents(eventsListRef);
   }
 
-  fetchEvents(eventsListRef: firebase.database.Reference): Event[] {
-    var eventsArray: Event[] = new Array;
-    eventsListRef.once('value').then(function (snapshot) {
-      snapshot.forEach(function (childSnapshot) {
-        eventsArray.push(childSnapshot.val())
-      })
-    })
-    return eventsArray;
+  async loadEvents(): Promise<Event[]> {
+    const events = await this.getEvents();
+    return events;
   }
 
+  getEvents(): Promise<Event[]> {
+    return new Promise((res, rej) => {
+      const events: Event[] = [];
+      this.eventsListRef.on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          events.push(childSnapshot.val())
+        })
+      });
+      setTimeout(() => res(events), 1000);
+    });
+  }
+  
 }
