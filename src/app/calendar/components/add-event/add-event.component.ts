@@ -1,18 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { EventHandlingService } from '../../services/event-handling.service';
-import { Event } from '../../services/event';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AddEventDialog } from './add-event-dialog';
 import { Subscription } from 'rxjs';
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
+import { EventHandlingService } from '../../services/event-handling.service';
 
 
 @Component({
@@ -24,8 +14,9 @@ export class AddEventComponent implements OnInit {
   private subscription: Subscription;
   
   constructor(
-    private eventHandlingService: EventHandlingService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private eventHandlingService: EventHandlingService //only for creating service at the start of the app 
+    //(to display events in console on start), will be deleted in the future 
   ) { }
 
   ngOnInit(): void {
@@ -35,9 +26,6 @@ export class AddEventComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  addEvent(name: string) {
-    this.eventHandlingService.addEvent(new Event(name, new Date(), "12:00"));
-  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddEventDialog, {
@@ -49,9 +37,6 @@ export class AddEventComponent implements OnInit {
 
     this.subscription = dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      if (result)
-        this.addEvent(result)
-
     });
 
   }
