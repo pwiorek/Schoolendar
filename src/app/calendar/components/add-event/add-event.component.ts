@@ -14,6 +14,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
+
 @Component({
   selector: 'app-add-event',
   templateUrl: './add-event.component.html',
@@ -21,7 +22,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class AddEventComponent implements OnInit {
   private subscription: Subscription;
-
+  
   constructor(
     private eventHandlingService: EventHandlingService,
     public dialog: MatDialog
@@ -35,14 +36,14 @@ export class AddEventComponent implements OnInit {
   }
 
   addEvent(name: string) {
-    this.eventHandlingService.addEvent(new Event(name));
+    this.eventHandlingService.addEvent(new Event(name, new Date(), "12:00"));
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddEventDialog, {
       data: { name: "" },
       maxWidth: '100vw',
-      maxHeight: '80vh',
+      maxHeight: '100vh',
       panelClass: 'add-event-dialog-panelClass'
     });
 

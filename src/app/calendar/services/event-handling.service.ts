@@ -18,6 +18,9 @@ export class EventHandlingService {
     var newEventRef = this.eventsListRef.push();
     newEventRef.set({
       name: event.name,
+      date: event.date.toDateString(),
+      time: event.time,
+      timeZone: event.timeZone
     });
   }
 

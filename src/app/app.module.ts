@@ -12,10 +12,13 @@ import { MonthViewComponent } from './calendar/components/views/month-view/month
 import { HomeComponent } from './calendar/home/home.component';
 import { AddEventComponent } from './calendar/components/add-event/add-event.component';
 import { AddEventDialog } from './calendar/components/add-event/add-event-dialog';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatInputModule} from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { TodayButtonComponent } from './calendar/components/today-button/today-button.component';
 import { MaterialModule } from './material.module';
@@ -59,6 +62,9 @@ firebase.initializeApp(firebaseConfig);
     MatButtonModule,
     MatDialogModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
