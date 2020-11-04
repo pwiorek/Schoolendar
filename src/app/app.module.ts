@@ -22,6 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { TodayButtonComponent } from './calendar/components/today-button/today-button.component';
 import { MaterialModule } from './material.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 import * as firebase from 'firebase/app';
@@ -66,6 +67,7 @@ firebase.initializeApp(firebaseConfig);
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(firebaseConfig),

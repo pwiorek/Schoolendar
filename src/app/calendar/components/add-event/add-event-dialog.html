@@ -5,12 +5,10 @@
         <div class="formContainer" novalidate>
             <form [formGroup]="formGroup" (ngSubmit)="onSubmit (formGroup.value)" class="form">
 
-                <mat-form-field appearance="outline" class="form-element">
-                    <mat-label>Nazwa</mat-label>
-                    <input matInput cdkFocusInitial id="matInput" formControlName="name">
-                    <mat-error *ngIf="!name.valid && name.touched">
-                        {{ nameAlert }}
-                    </mat-error>
+                <mat-form-field hintLabel="Max 30 characters" appearance="outline" class="form-element">
+                    <mat-label>Name</mat-label>
+                    <input matInput #input cdkFocusInitial id="matInput" formControlName="name">
+                    <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="form-element">
