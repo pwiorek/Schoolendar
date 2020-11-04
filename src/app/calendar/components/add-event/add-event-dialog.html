@@ -15,7 +15,7 @@
 
                 <mat-form-field appearance="outline" class="form-element">
                     <mat-label>Choose a date</mat-label>
-                    <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" formControlName="date" [(ngModel)]="planModel.start_time">
+                    <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" formControlName="date">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                     <mat-error *ngIf="!date.valid && date.touched">
@@ -25,20 +25,18 @@
 
                 <mat-form-field appearance="outline" class="form-element">
                     <mat-label>Hour</mat-label>
-                    <mat-select>
-                        <mat-option value="option1">Option1</mat-option>
-                        <mat-option value="option2">Option2</mat-option>
-                        <mat-option value="option3">Option3</mat-option>
-                        <mat-option value="option4">Option4</mat-option>
-                        <mat-option value="option5">Option5</mat-option>
+                    <mat-select formControlName="hour">
+                        <mat-option *ngFor="let hour of hours" value="{{hour}}">
+                            {{hour}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <div mat-dialog-actions class="add-event-dialog-content form-element" id="mat-dialog-actions">
                     <button mat-button [mat-dialog-close] class="add-event-button" id="mat-button" type="submit"
-                    [disabled]="!formGroup.valid">DODAJ EVENT</button>
+                        [disabled]="!formGroup.valid">DODAJ EVENT</button>
                 </div>
-            </form> 
+            </form>
         </div>
     </div>
 </div>

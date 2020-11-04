@@ -19,7 +19,7 @@ export class EventHandlingService {
     newEventRef.set({
       name: event.name,
       date: event.date.toDateString(),
-      time: event.time,
+      hour: event.hour,
       timeZone: event.timeZone
     });
   }
@@ -40,5 +40,5 @@ export class EventHandlingService {
       setTimeout(() => res(events), 1000);
     });
   }
-  
+
 }

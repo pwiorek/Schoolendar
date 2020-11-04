@@ -13,7 +13,8 @@ export class AddEventDialog implements OnInit {
   formGroup: FormGroup;
   nameAlert: string = 'To pole jest wymagane, min. długość: 1 znak, max. długość 30 znaków.';
   dateAlert: string = 'To pole jest wymagane.';
-  planModel: any = {start_time: new Date() };
+  hours = ['7:10 - 7:55', '8:00 - 8:45', '9:50 - 10:35', '10:40 - 11:25', '11:30 - 12:15', '12:30 - 13:15',
+    '13:20 - 14:05', '14:10 - 14:55'];
   
   constructor(
     public dialogRef: MatDialogRef<AddEventDialog>,
@@ -23,6 +24,8 @@ export class AddEventDialog implements OnInit {
 
   ngOnInit() {
     this.createForm();
+    this.formGroup.get('hour').setValue(this.data.hour);
+    this.formGroup.get('date').setValue(this.data.date);
   }
 
   get name() {
@@ -31,6 +34,10 @@ export class AddEventDialog implements OnInit {
 
   get date() {
     return this.formGroup.get('date') as FormControl
+  }
+
+  get hour() {
+    return this.formGroup.get('hour') as FormControl
   }
 
   onNoClick(): void {
@@ -47,11 +54,12 @@ export class AddEventDialog implements OnInit {
     this.formGroup = this.formBuilder.group({
       'name': [null, [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
       'date': [null, [Validators.required]],
+      'hour': [null, [Validators.required]],
     });
   }
 
   onSubmit(post) {
-    this.eventHandlingService.addEvent(new Event(post.name, new Date(post.date), "12:00"));
+    this.eventHandlingService.addEvent(new Event(post.name, new Date(post.date), post.hour));
   }
 
 }
