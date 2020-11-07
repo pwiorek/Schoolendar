@@ -1,0 +1,48 @@
+#homePage {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 0.5fr 1.5fr 0.5fr;
+    grid-template-rows: 0.8fr 0.5fr 3fr 3fr 3fr;
+    gap: 5px 5px;
+    grid-template-areas:
+        "bar bar bar bar bar bar"
+        ". addEvent timePeriod today viewMenu ."
+        ". . calendar calendar calendar ."
+        ". . calendar calendar calendar ."
+        ". . calendar calendar calendar .";
+    width: 100vw;
+    height: 100vh;
+}
+
+.bar {
+    grid-area: bar;
+    background-color: blue;
+}
+
+.addEvent {
+    grid-area: addEvent;
+    
+}
+
+.timePeriod {
+    grid-area: timePeriod;
+    
+}
+
+.today {
+    grid-area: today;
+    
+}
+
+.viewMenu {
+    grid-area: viewMenu;
+    text-align: end;
+}
+
+.smallCalendar {
+    grid-area: smallCalendar;
+}
+
+.calendar {
+    grid-area: calendar;
+}
+

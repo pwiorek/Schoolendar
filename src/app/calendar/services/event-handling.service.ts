@@ -17,7 +17,7 @@ export class EventHandlingService {
   }
   
   addEvent(event: Event) {
-    var newEventRef = this.eventsListRef.push();
+    const newEventRef = this.eventsListRef.push();
     newEventRef.set({
       name: event.name,
       date: event.date.toDateString(),
@@ -38,8 +38,8 @@ export class EventHandlingService {
         snapshot.forEach(function(childSnapshot) {
           events.push(childSnapshot.val())
         })
+        res(events);
       });
-      setTimeout(() => res(events), 1000);
     });
   }
 
