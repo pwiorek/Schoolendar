@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DateHandlerService } from 'src/app/services/date-handler.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { TimePeriodService } from './time-period.service';
 
 @Component({
   selector: 'app-time-period-controler',
@@ -8,37 +10,33 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./time-period-controler.component.scss']
 })
 export class TimePeriodControlerComponent implements OnInit, OnDestroy {
-  activeWeek: Date[] = [];
+  activePeriod: Date[] = [];
+  activeView: string;
+  subscribedParam: any;
   private subscription: Subscription;
+  private newSubscription: Subscription;
 
   constructor(
     private dateHandler: DateHandlerService,
+    private activeRoute: ActivatedRoute,
+    private timePeriodService: TimePeriodService,
   ) {
-    this.activeWeek = this.dateHandler.currentWeek;
-    this.subscription = dateHandler.currentWeekChange.subscribe(dates => this.activeWeek = dates);
+    this.activePeriod = this.dateHandler.currentWeek;
+    this.subscription = this.dateHandler.currentWeekChange.subscribe(dates => this.activePeriod = dates);
+
+    this.activeView = this.timePeriodService.activeView;
+    this.newSubscription = this.timePeriodService.activeViewChange.subscribe(view => this.activeView = view);
+
   }
 
   ngOnInit(): void {
-   
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.newSubscription.unsubscribe();
   }
 
-  previousTimePeriod() {
-    let prevDay = this.activeWeek[0];
-    prevDay.setDate(prevDay.getDate() - 7);
-    this.dateHandler.setWeek(prevDay);
-    this.activeWeek = this.dateHandler.currentWeek;
-  }
-
-  nextTimePeriod() {
-    let nextDay = this.activeWeek[0];
-    nextDay.setDate(nextDay.getDate() + 7);
-    this.dateHandler.setWeek(nextDay);
-    this.activeWeek = this.dateHandler.currentWeek;
-  }
 
   changeHandler(side: string) {
     if(side === 'left') this.dateHandler.moveBackwards(7);

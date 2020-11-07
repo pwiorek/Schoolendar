@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarViewMenuService } from '../../services/calendar-view-menu.service';
 import { ActivatedRoute, Router } from "@angular/router";
+import { TimePeriodService } from '../time-period-controler/time-period.service';
 
 @Component({
   selector: 'app-calendar-view-menu',
@@ -15,11 +16,13 @@ export class CalendarViewMenuComponent implements OnInit {
     readonly calendarViewMenuService: CalendarViewMenuService, 
     private readonly route: ActivatedRoute,
     private readonly router: Router,
+
     ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.subscribedParam = params.get("view");
+      // alert(this.subscribedParam)
     });
 }
 

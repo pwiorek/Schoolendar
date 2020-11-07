@@ -1,6 +1,6 @@
 <div class="container">
-    <!-- na buttonach beda clicki -->
     <button class="material-icons arrow left" (click)='changeHandler("left")'>chevron_left</button>
-    <span>{{ activeWeek[0] | date: "LLLL" }} {{ activeWeek[0] | date: "dd" }} - {{ activeWeek[4] | date: "dd" }}</span>
+    <span>{{ activePeriod[0] | date: "LLLL" }} {{ activePeriod[0] | date: "dd" }} - {{ activePeriod[activePeriod.length - 1] | date: "dd" }}</span>
     <button class="material-icons arrow right" (click)='changeHandler("right")'>chevron_right</button>
+    <p>{{ activeView }}</p>
 </div>
