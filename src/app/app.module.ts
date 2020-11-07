@@ -12,13 +12,10 @@ import { MonthViewComponent } from './calendar/components/views/month-view/month
 import { HomeComponent } from './calendar/home/home.component';
 import { AddEventComponent } from './calendar/components/add-event/add-event.component';
 import { AddEventDialog } from './calendar/components/add-event/add-event-dialog';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { TodayButtonComponent } from './calendar/components/today-button/today-button.component';
 import { MaterialModule } from './material.module';
+
 
 import * as firebase from 'firebase/app';
 import { AngularFireModule } from '@angular/fire';
@@ -55,10 +52,6 @@ firebase.initializeApp(firebaseConfig);
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatInputModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
