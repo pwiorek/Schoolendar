@@ -6,9 +6,9 @@
     grid-template-areas:
         "bar bar bar bar bar bar"
         ". addEvent timePeriod today viewMenu ."
-        ". . calendar calendar calendar ."
-        ". . calendar calendar calendar ."
-        ". . calendar calendar calendar .";
+        ". calendar calendar calendar calendar ."
+        ". calendar calendar calendar calendar ."
+        ". calendar calendar calendar calendar .";
     width: 100vw;
     height: 100vh;
 }
@@ -19,18 +19,15 @@
 }
 
 .addEvent {
-    grid-area: addEvent;
-    
+    grid-area: addEvent; 
 }
 
 .timePeriod {
-    grid-area: timePeriod;
-    
+    grid-area: timePeriod; 
 }
 
 .today {
-    grid-area: today;
-    
+    grid-area: today;  
 }
 
 .viewMenu {
@@ -46,3 +43,35 @@
     grid-area: calendar;
 }
 
+@media only screen and (max-width: 560px) {
+    #homePage {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 1fr 0.5fr 1.5fr 0.5fr;
+        grid-template-rows: 0.7fr 0.5fr 3fr 3fr 0.5fr;
+        gap: 5px 5px;
+        grid-template-areas:
+            "bar bar bar bar bar bar"
+            ". addEvent timePeriod viewMenu today ."
+            "calendar calendar calendar calendar calendar calendar"
+            "calendar calendar calendar calendar calendar calendar"
+            ". . . . . .";
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .addEvent {
+        position: fixed;
+        bottom: 10px;
+        left: 50%;
+        right: 50%;
+    }
+
+    .today {
+        display: none;  
+    }
+
+    .viewMenu {
+        text-align: center;
+        
+    }
+}
