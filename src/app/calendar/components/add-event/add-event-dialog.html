@@ -11,6 +11,13 @@
                     <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
                 </mat-form-field>
 
+                <mat-button-toggle-group name="type" aria-label="Event type">
+                    <mat-button-toggle value="sprawdzian">Sprawdzian</mat-button-toggle>
+                    <mat-button-toggle value="kartkówka">Kartkówka</mat-button-toggle>
+                    <mat-button-toggle value="przypał">Przypał</mat-button-toggle>
+                    <mat-button-toggle value="null">Inne</mat-button-toggle>
+                  </mat-button-toggle-group>
+
                 <mat-form-field appearance="outline" class="form-element">
                     <mat-label>Choose a date</mat-label>
                     <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" formControlName="date">
