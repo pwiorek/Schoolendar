@@ -3,6 +3,7 @@ import { Event } from '../../services/event';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { EventHandlingService } from '../../services/event-handling.service';
+import { Type } from './typeEnum';
 
 @Component({
   selector: 'add-event-dialog',
