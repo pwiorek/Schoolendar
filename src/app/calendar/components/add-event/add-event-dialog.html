@@ -12,10 +12,18 @@
                 </mat-form-field>
 
                 <mat-button-toggle-group name="type" aria-label="Event type" #group='matButtonToggleGroup' (change)='changeType(group.value)'>
-                    <mat-button-toggle value="sprawdzian">Sprawdzian</mat-button-toggle>
-                    <mat-button-toggle value="kartkówka">Kartkówka</mat-button-toggle>
-                    <mat-button-toggle value="przypał">Przypał</mat-button-toggle>
-                    <mat-button-toggle value="null">Inne</mat-button-toggle>
+                    <mat-button-toggle value="exam">
+                        <span class="material-icons icon">report</span>Exam
+                    </mat-button-toggle>
+                    <mat-button-toggle value="quiz">
+                        <span class="material-icons icon">school</span>Quiz
+                    </mat-button-toggle>
+                    <mat-button-toggle value="homework">
+                        <span class="material-icons icon">home_work</span>Homework
+                    </mat-button-toggle>
+                    <mat-button-toggle value="null">
+                        <span class="material-icons icon">event</span>Other
+                    </mat-button-toggle>
                   </mat-button-toggle-group>
 
                 <mat-form-field appearance="outline" class="form-element">
