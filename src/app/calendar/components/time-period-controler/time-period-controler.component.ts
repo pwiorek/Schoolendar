@@ -30,6 +30,9 @@ export class TimePeriodControlerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.activeRoute.paramMap.subscribe(params => {
+      console.log(params)
+})
   }
 
   ngOnDestroy() {

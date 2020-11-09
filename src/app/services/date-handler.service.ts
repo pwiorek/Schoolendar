@@ -15,16 +15,20 @@ export class DateHandlerService {
   currentMonthChange: Subject<Date[]> = new Subject<Date[]>();
 
   constructor() {
-    this.setWeek(new Date());
-    this.setMonth(new Date());
+    this.setDate(new Date());
    }
 
   setDate(referenceDate: Date) {
+    let date = referenceDate;
+
+    this.currentDate = date;
+    this.currentDateChange.next(this.currentDate);
+
+    alert(this.currentDate);
+    alert(referenceDate)
+
     this.setWeek(referenceDate);
     this.setMonth(referenceDate);
-
-    this.currentDate = referenceDate;
-    this.currentDateChange.next(this.currentDate);
   }
 
   setWeek(referenceDate: Date) {
