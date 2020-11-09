@@ -9,6 +9,13 @@
   position: relative;
 }
 
+mat-button-toggle-group .mat-button-toggle-label-content {
+  line-height: 36px !important;
+  cursor: pointer;
+  font-weight: 500;
+  color: #3e52b5;
+}
+
 @media only screen and (max-width: 560px) {
   .cdk-global-overlay-wrapper {
     align-items: start !important;
