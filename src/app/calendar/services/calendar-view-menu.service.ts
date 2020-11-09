@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { View } from './viewEnum';
-import {  Router } from "@angular/router";
+
 import { TimePeriodService } from '../components/time-period-controler/time-period.service';
+import { Router } from "@angular/router";
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,7 @@ export class CalendarViewMenuService {
   constructor(
     private readonly router: Router,
     private timePeriodControler: TimePeriodService
+
   ) {
     this.router.navigateByUrl("home/" + this.view);
    }
