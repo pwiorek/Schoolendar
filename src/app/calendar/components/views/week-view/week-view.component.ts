@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
+import { CalendarViewMenuService } from 'src/app/calendar/services/calendar-view-menu.service';
+import { TimePeriodService } from '../../time-period-controler/time-period.service';
 
 @Component({
   selector: 'app-week-view',
@@ -20,6 +22,8 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   constructor(
     private dateHandler: DateHandlerService,
     private breakpointObserver: BreakpointObserver,
+    private calendarViewMenu: CalendarViewMenuService,
+    private timePeriodService: TimePeriodService
   ) {
     this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
     this.days = this.dateHandler.currentWeek;
@@ -27,6 +31,7 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.timePeriodService.setView(this.calendarViewMenu.view);
     if(this.isSmallScreen) this.dayFormat = 'E'; 
   }  
 

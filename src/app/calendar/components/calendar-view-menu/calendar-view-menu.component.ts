@@ -22,7 +22,6 @@ export class CalendarViewMenuComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.subscribedParam = params.get("view");
-      // alert(this.subscribedParam)
     });
 }
 

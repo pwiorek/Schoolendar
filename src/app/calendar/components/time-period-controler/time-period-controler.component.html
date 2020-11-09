@@ -1,6 +1,13 @@
 <div class="container">
     <button class="material-icons arrow left" (click)='changeHandler("left")'>chevron_left</button>
-    <span>{{ activePeriod[0] | date: "LLLL" }} {{ activePeriod[0] | date: "dd" }} - {{ activePeriod[activePeriod.length - 1] | date: "dd" }}</span>
+    <span *ngIf='activeView === "day"'>
+        {{ activeDate | date: "dd" }} {{ activeDate | date: "LLLL" }} 
+    </span>
+    <span *ngIf='activeView === "week"'>
+        {{ activeWeek[0] | date: "dd" }} - {{ activeWeek[activeWeek.length - 1] | date: "dd" }} {{ activeWeek[0] | date: "LLLL" }} 
+    </span>
+    <span *ngIf='activeView === "month"'>
+        {{ activeMonth[0] | date: "LLLL" }} 
+    </span>
     <button class="material-icons arrow right" (click)='changeHandler("right")'>chevron_right</button>
-    <p>{{ activeView }}</p>
 </div>

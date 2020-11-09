@@ -8,12 +8,12 @@ export class TimePeriodService {
   activeView: string;
   activeViewChange: Subject<string> = new Subject<string>();
 
-  constructor(
-
-  ) { 
+  constructor() { 
 
   }
 
   setView(view: string) {
+    this.activeView = view;
+    this.activeViewChange.next(this.activeView);
   }
 }

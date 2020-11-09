@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DateHandlerService } from 'src/app/services/date-handler.service';
-import { Subscription, Subject } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { TimePeriodService } from './time-period.service';
 
 @Component({
@@ -10,40 +9,60 @@ import { TimePeriodService } from './time-period.service';
   styleUrls: ['./time-period-controler.component.scss']
 })
 export class TimePeriodControlerComponent implements OnInit, OnDestroy {
-  activePeriod: Date[] = [];
+  activeDate: Date;
+  activeWeek: Date[] = [];
+  activeMonth: Date[] = [];
   activeView: string;
-  subscribedParam: any;
-  private subscription: Subscription;
-  private newSubscription: Subscription;
+
+  private dateSubscription: Subscription;
+  private weekSubscription: Subscription;
+  private monthSubscription: Subscription;
+  private viewSubscription: Subscription;
 
   constructor(
     private dateHandler: DateHandlerService,
-    private activeRoute: ActivatedRoute,
     private timePeriodService: TimePeriodService,
   ) {
-    this.activePeriod = this.dateHandler.currentWeek;
-    this.subscription = this.dateHandler.currentWeekChange.subscribe(dates => this.activePeriod = dates);
+    this.getActiveData()
 
-    this.activeView = this.timePeriodService.activeView;
-    this.newSubscription = this.timePeriodService.activeViewChange.subscribe(view => this.activeView = view);
 
   }
 
   ngOnInit(): void {
-    this.activeRoute.paramMap.subscribe(params => {
-      console.log(params)
-})
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
-    this.newSubscription.unsubscribe();
+    this.dateSubscription.unsubscribe();
+    this.weekSubscription.unsubscribe();
+    this.monthSubscription.unsubscribe();
+    this.viewSubscription.unsubscribe();
   }
 
+  getActiveData() {
+    this.activeDate = this.dateHandler.currentDate;
+    this.dateSubscription = this.dateHandler.currentDateChange.subscribe(date => this.activeDate = date);
+
+    this.activeWeek = this.dateHandler.currentWeek;
+    this.weekSubscription = this.dateHandler.currentWeekChange.subscribe(dates => this.activeWeek = dates);
+
+    this.activeMonth = this.dateHandler.currentMonth;
+    this.monthSubscription = this.dateHandler.currentMonthChange.subscribe(dates => this.activeMonth = dates);
+
+    this.activeView = this.timePeriodService.activeView;
+    this.viewSubscription = this.timePeriodService.activeViewChange.subscribe(view => this.activeView = view);
+  }
 
   changeHandler(side: string) {
-    if(side === 'left') this.dateHandler.moveBackwards(7);
-    else if(side === 'right') this.dateHandler.moveForwards(7);
+    let num: number;
+
+    if(this.activeView === 'day') num = 1;
+    else if(this.activeView === 'week') num = 7;
+    else {
+      num = this.activeMonth[this.activeMonth.length - 1].getDate();
+    }
+
+    if(side === 'left') this.dateHandler.moveBackwards(num);
+    else if(side === 'right') this.dateHandler.moveForwards(num);
   }
   
 

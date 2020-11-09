@@ -18,17 +18,13 @@ export class DateHandlerService {
     this.setDate(new Date());
    }
 
-  setDate(referenceDate: Date) {
-    let date = referenceDate;
-
-    this.currentDate = date;
+  setDate(referenceDate: Date) { 
+    this.currentDate = referenceDate;
     this.currentDateChange.next(this.currentDate);
+    
 
-    alert(this.currentDate);
-    alert(referenceDate)
-
-    this.setWeek(referenceDate);
-    this.setMonth(referenceDate);
+    this.setWeek(new Date(referenceDate));
+    this.setMonth(new Date(referenceDate));
   }
 
   setWeek(referenceDate: Date) {
@@ -71,13 +67,13 @@ export class DateHandlerService {
 
 
   moveForwards( num: number) {
-    let day = new Date(this.currentWeek[0]);
+    let day = new Date(this.currentDate);
     day.setDate(day.getDate() + num);
     this.setDate(day);
   }
 
   moveBackwards(num: number) {
-    let day = new Date(this.currentWeek[0]);
+    let day = new Date(this.currentDate);
     day.setDate(day.getDate() - num);
     this.setDate(day);
   }
