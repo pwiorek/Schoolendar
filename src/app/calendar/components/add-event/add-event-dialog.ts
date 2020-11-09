@@ -3,6 +3,7 @@ import { Event } from '../../services/event';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { EventHandlingService } from '../../services/event-handling.service';
+import { Type } from './typeEnum';
 
 @Component({
   selector: 'add-event-dialog',
@@ -28,15 +29,19 @@ export class AddEventDialog implements OnInit {
   }
 
   get name() {
-    return this.formGroup.get('name') as FormControl
+    return this.formGroup.get('name') as FormControl;
   }
 
   get date() {
-    return this.formGroup.get('date') as FormControl
+    return this.formGroup.get('date') as FormControl;
   }
 
   get hour() {
-    return this.formGroup.get('hour') as FormControl
+    return this.formGroup.get('hour') as FormControl;
+  }
+
+  get type() {
+    return this.formGroup.get('type') as FormControl;
   }
 
   onNoClick(): void {
@@ -52,13 +57,14 @@ export class AddEventDialog implements OnInit {
   createForm() {
     this.formGroup = this.formBuilder.group({
       'name': [null, [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
+      'type': [null],
       'date': [null, [Validators.required]],
       'hour': [null, [Validators.required]],
     });
   }
 
   onSubmit(post) {
-    this.eventHandlingService.addEvent(new Event(post.name, new Date(post.date), post.hour));
+    this.eventHandlingService.addEvent(new Event(post.name, new Date(post.date), post.hour, post.type));
   }
 
 }
