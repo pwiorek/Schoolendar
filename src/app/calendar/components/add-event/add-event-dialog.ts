@@ -14,7 +14,6 @@ export class AddEventDialog implements OnInit {
   nameAlert: string = 'To pole jest wymagane, min. długość: 1 znak, max. długość 30 znaków.';
   dateAlert: string = 'To pole jest wymagane.';
   hours = this.eventHandlingService.hours;
-  activeType = null;
   
   constructor(
     public dialogRef: MatDialogRef<AddEventDialog>,
@@ -29,19 +28,19 @@ export class AddEventDialog implements OnInit {
   }
 
   get name() {
-    return this.formGroup.get('name') as FormControl
+    return this.formGroup.get('name') as FormControl;
   }
 
   get date() {
-    return this.formGroup.get('date') as FormControl
+    return this.formGroup.get('date') as FormControl;
   }
 
   get hour() {
-    return this.formGroup.get('hour') as FormControl
+    return this.formGroup.get('hour') as FormControl;
   }
 
-  changeType(type: string) {
-    this.activeType = type;
+  get type() {
+    return this.formGroup.get('type') as FormControl;
   }
 
   onNoClick(): void {
@@ -64,7 +63,7 @@ export class AddEventDialog implements OnInit {
   }
 
   onSubmit(post) {
-    this.eventHandlingService.addEvent(new Event(post.name, new Date(post.date), post.hour, this.activeType));
+    this.eventHandlingService.addEvent(new Event(post.name, new Date(post.date), post.hour, post.type));
   }
 
 }

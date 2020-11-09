@@ -11,18 +11,18 @@
                     <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
                 </mat-form-field>
 
-                <mat-button-toggle-group name="type" aria-label="Event type" #group='matButtonToggleGroup' (change)='changeType(group.value)'>
+                <mat-button-toggle-group name="type" aria-label="Event type" formControlName='type'>
                     <mat-button-toggle value="exam">
-                        <span class="material-icons icon">report</span>Exam
+                        <mat-icon class="material-icons icon">report</mat-icon>Exam
                     </mat-button-toggle>
                     <mat-button-toggle value="quiz">
-                        <span class="material-icons icon">school</span>Quiz
+                        <mat-icon class="material-icons icon">school</mat-icon>Quiz
                     </mat-button-toggle>
                     <mat-button-toggle value="homework">
-                        <span class="material-icons icon">home_work</span>Homework
+                        <mat-icon class="material-icons icon">home_work</mat-icon>Homework
                     </mat-button-toggle>
                     <mat-button-toggle value="null">
-                        <span class="material-icons icon">event</span>Other
+                        <mat-icon class="material-icons icon">event</mat-icon>Other
                     </mat-button-toggle>
                   </mat-button-toggle-group>
 
