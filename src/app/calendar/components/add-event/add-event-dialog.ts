@@ -42,7 +42,6 @@ export class AddEventDialog implements OnInit {
 
   changeType(type: string) {
     this.activeType = type;
-    alert(this.activeType);
   }
 
   onNoClick(): void {
