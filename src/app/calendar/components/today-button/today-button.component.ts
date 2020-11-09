@@ -13,7 +13,7 @@ export class TodayButtonComponent {
   ) { }
 
   displayCurrentTimePeriod() {
-    this.dateHandler.setWeek(new Date());
+    this.dateHandler.setDate(new Date());
   }
 
 }

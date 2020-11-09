@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarViewMenuService } from '../../services/calendar-view-menu.service';
+
+import { ActivatedRoute, Router } from "@angular/router";
+import { TimePeriodService } from '../time-period-controler/time-period.service';
 import { Router } from "@angular/router";
+
 
 @Component({
   selector: 'app-calendar-view-menu',
@@ -14,6 +18,7 @@ export class CalendarViewMenuComponent implements OnInit {
   constructor( 
     readonly calendarViewMenuService: CalendarViewMenuService, 
     private readonly router: Router,
+
     ) { }
 
   ngOnInit(): void {

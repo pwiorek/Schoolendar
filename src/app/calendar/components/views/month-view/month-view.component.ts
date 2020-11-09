@@ -1,15 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { DateHandlerService } from 'src/app/services/date-handler.service';
+import { TimePeriodService } from '../../time-period-controler/time-period.service';
+import { CalendarViewMenuService } from 'src/app/calendar/services/calendar-view-menu.service';
 
 @Component({
   selector: 'app-month-view',
   templateUrl: './month-view.component.html',
   styleUrls: ['./month-view.component.scss']
 })
-export class MonthViewComponent implements OnInit {
+export class MonthViewComponent implements OnInit, OnDestroy {
+  days: Date[] = [];
+  today = new Date();
+  private subscription: Subscription;
 
-  constructor() { }
+  constructor(
+    private dateHandler: DateHandlerService,
+    private calendarViewMenu: CalendarViewMenuService,
+    private timePeriodService: TimePeriodService
+  ) { 
+    this.days = this.dateHandler.currentMonth;
+    this.subscription = dateHandler.currentMonthChange.subscribe(value => this.days = value)
+  }
 
   ngOnInit(): void {
+    this.timePeriodService.setView(this.calendarViewMenu.view);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }
