@@ -20,7 +20,7 @@ export class MonthViewComponent implements OnInit, OnDestroy {
     private timePeriodService: TimePeriodService
   ) { 
     this.days = this.dateHandler.currentMonth;
-    this.subscription = dateHandler.currentMonthChange.subscribe(value => this.days = value)
+    this.subscription = dateHandler.currentMonthChange.subscribe(value => this.days = value);
   }
 
   ngOnInit(): void {

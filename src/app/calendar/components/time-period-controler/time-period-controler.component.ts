@@ -8,7 +8,7 @@ import { TimePeriodService } from './time-period.service';
   templateUrl: './time-period-controler.component.html',
   styleUrls: ['./time-period-controler.component.scss']
 })
-export class TimePeriodControlerComponent implements OnInit, OnDestroy {
+export class TimePeriodControlerComponent implements OnDestroy {
   activeDate: Date;
   activeWeek: Date[] = [];
   activeMonth: Date[] = [];
@@ -23,12 +23,7 @@ export class TimePeriodControlerComponent implements OnInit, OnDestroy {
     private dateHandler: DateHandlerService,
     private timePeriodService: TimePeriodService,
   ) {
-    this.getActiveData()
-
-
-  }
-
-  ngOnInit(): void {
+    this.getActiveData();
   }
 
   ngOnDestroy() {

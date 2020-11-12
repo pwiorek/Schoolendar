@@ -8,7 +8,7 @@ import { WeekViewComponent } from './calendar/components/views/week-view/week-vi
 
 const routes: Routes = [
   { path:"", redirectTo: "home/week", pathMatch: "full" },
-  { path:"home", redirectTo: "home/:id", pathMatch: "full" },
+  { path:"home", redirectTo: "home/week", pathMatch: "full" },
   { path: "home", component: HomeComponent, children: [ 
     { path: "week", component: WeekViewComponent },
     { path: "day", component: DayViewComponent },
