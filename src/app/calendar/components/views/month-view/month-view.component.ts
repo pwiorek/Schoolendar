@@ -20,6 +20,8 @@ export class MonthViewComponent implements OnInit, OnDestroy {
   _subscription: any;
   subscription: any;
   rows: number;
+  arrayOfRows: Date[][];
+  currentMonth: number;
 
   constructor(
     private dateHandler: DateHandlerService,
@@ -32,10 +34,12 @@ export class MonthViewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
     this.daysOfMonth = this.dateHandler.currentMonth;
+    this.currentMonth = this.daysOfMonth[0].getMonth();
     this._subscription = this.dateHandler.currentMonthChange.subscribe(value => this.daysOfMonth = value);
     if (this.isSmallScreen) this.dayFormat = 'E';
     this.fillDaysToDisplay();
-    console.log(this.daysToDisplay);
+    console.log(this.arrayOfRows);
+
   }
 
   ngOnDestroy() {
@@ -62,6 +66,38 @@ export class MonthViewComponent implements OnInit, OnDestroy {
       dayOfFollowingsMonth.setDate(dayOfFollowingsMonth.getDate() + i);
       this.daysToDisplay.push(dayOfFollowingsMonth);
     }
+    let arrayOfRows: Date[][] = [[]];
+    for (let i = 1; i < this.rows; i++) {
+      arrayOfRows.push([]);
+    }
+    let i = 0;
+    let j = 0;
+    this.daysToDisplay.forEach(element => {
+      arrayOfRows[j].push(element);
+      i++;
+      if (i === 7) {
+        i = 0;
+        j++;
+      }
+    });
+    this.arrayOfRows = arrayOfRows;
+  }
+
+  openDialog (date: Date): void {
+    const dialogRef = this.dialog.open(AddEventDialog, {
+      data: {
+        name: "",
+        date: date,
+        hour: '7:10 - 7:55'
+      },
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      panelClass: 'add-event-dialog-panelClass'
+    });
+
+    this.subscription = dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }

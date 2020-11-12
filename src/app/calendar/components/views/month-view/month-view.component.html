@@ -12,7 +12,14 @@
             </tr>
           </thead>
           <tbody>
-              
+              <tr *ngFor="let row of arrayOfRows">
+                <td *ngFor="let day of row" [class.otherMonth]="day.getMonth() != currentMonth" 
+                [class.weekend]="day.getDay() === 0 || day.getDay() === 6" (click)="openDialog(day)"> 
+                <div class="number-of-day">
+                  {{ day | date:'d' }} 
+                </div>
+              </td>
+              </tr>
           </tbody>
     </table>
 </div>
