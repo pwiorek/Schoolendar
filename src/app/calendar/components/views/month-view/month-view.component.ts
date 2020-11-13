@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
-import { EventHandlingService } from '../../../services/event-handling.service';
 import { AddEventDialog } from '../../add-event/add-event-dialog';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -15,7 +14,6 @@ export class MonthViewComponent implements OnInit, OnDestroy {
   daysOfMonth: Date[] = [];
   daysToDisplay: Date[] = [];
   today = new Date();
-  dayFormat = 'EEEE';
   isSmallScreen = false;
   _subscription: any;
   subscription: any;
@@ -26,7 +24,6 @@ export class MonthViewComponent implements OnInit, OnDestroy {
   constructor(
     private dateHandler: DateHandlerService,
     private breakpointObserver: BreakpointObserver,
-    private eventHandlingService: EventHandlingService,
     public dialog: MatDialog,
   ) {
   }
@@ -36,10 +33,7 @@ export class MonthViewComponent implements OnInit, OnDestroy {
     this.daysOfMonth = this.dateHandler.currentMonth;
     this.currentMonth = this.daysOfMonth[0].getMonth();
     this._subscription = this.dateHandler.currentMonthChange.subscribe(value => this.daysOfMonth = value);
-    if (this.isSmallScreen) this.dayFormat = 'E';
     this.fillDaysToDisplay();
-    console.log(this.arrayOfRows);
-
   }
 
   ngOnDestroy() {
