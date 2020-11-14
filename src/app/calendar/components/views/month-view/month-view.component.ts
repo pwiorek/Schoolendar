@@ -4,6 +4,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 
 import { AddEventDialog } from '../../add-event/add-event-dialog';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-month-view',
@@ -15,10 +16,9 @@ export class MonthViewComponent implements OnInit, OnDestroy {
   daysToDisplay: Date[] = [];
   today = new Date();
   isSmallScreen = false;
-  _subscription: any;
-  subscription: any;
-  rows: number;
-  arrayOfRows: Date[][];
+  subscription: Subscription = new Subscription();
+  numberOfRows: number;
+  daysGroupedIntoRows: Date[][];
   currentMonth: number;
 
   constructor(
@@ -32,12 +32,12 @@ export class MonthViewComponent implements OnInit, OnDestroy {
     this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
     this.daysOfMonth = this.dateHandler.currentMonth;
     this.currentMonth = this.daysOfMonth[0].getMonth();
-    this._subscription = this.dateHandler.currentMonthChange.subscribe(value => this.daysOfMonth = value);
+    this.subscription.add(this.dateHandler.currentMonthChange.subscribe(value => this.daysOfMonth = value));
     this.fillDaysToDisplay();
   }
 
   ngOnDestroy() {
-    this._subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   fillDaysToDisplay(): void {
@@ -52,29 +52,29 @@ export class MonthViewComponent implements OnInit, OnDestroy {
       this.daysToDisplay.push(element);
     });
 
-    this.rows = Math.ceil((this.daysToDisplay.length) / 7);
-    const toAdd: number = 7 * this.rows - this.daysToDisplay.length; // number of needed days from the following month
+    this.numberOfRows = Math.ceil((this.daysToDisplay.length) / 7);
+    const toAdd: number = 7 * this.numberOfRows - this.daysToDisplay.length; // number of needed days from the following month
     //getting days from following month to fill the last row when the last day of month is not Sunday  
     for (let i = 1; i <= toAdd; i++) {
       let dayOfFollowingsMonth: Date = new Date(this.daysOfMonth[this.daysOfMonth.length - 1].getTime());
       dayOfFollowingsMonth.setDate(dayOfFollowingsMonth.getDate() + i);
       this.daysToDisplay.push(dayOfFollowingsMonth);
     }
-    let arrayOfRows: Date[][] = [[]];
-    for (let i = 1; i < this.rows; i++) {
-      arrayOfRows.push([]);
+    let daysGroupedIntoRows: Date[][] = [[]];
+    for (let i = 1; i < this.numberOfRows; i++) {
+      daysGroupedIntoRows.push([]);
     }
     let i = 0;
     let j = 0;
     this.daysToDisplay.forEach(element => {
-      arrayOfRows[j].push(element);
+      daysGroupedIntoRows[j].push(element);
       i++;
       if (i === 7) {
         i = 0;
         j++;
       }
     });
-    this.arrayOfRows = arrayOfRows;
+    this.daysGroupedIntoRows = daysGroupedIntoRows;
   }
 
   openDialog (date: Date): void {
@@ -89,9 +89,9 @@ export class MonthViewComponent implements OnInit, OnDestroy {
       panelClass: 'add-event-dialog-panelClass'
     });
 
-    this.subscription = dialogRef.afterClosed().subscribe(result => {
+    this.subscription.add(dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-    });
+    }));
   }
 
 }

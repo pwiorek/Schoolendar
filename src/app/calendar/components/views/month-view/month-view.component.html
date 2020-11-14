@@ -33,7 +33,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of arrayOfRows">
+      <tr *ngFor="let row of daysGroupedIntoRows">
         <td *ngFor="let day of row" [class.otherMonth]="day.getMonth() != currentMonth"
           [class.weekend]="day.getDay() === 0 || day.getDay() === 6"
           [class.today]="day.getFullYear() === today.getFullYear() && day.getMonth() === today.getMonth() && day.getDate() === today.getDate()"
