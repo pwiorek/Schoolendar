@@ -18,7 +18,7 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   dayFormat = 'EEEE';
   isSmallScreen = false;
   _subscription: any;
-  subscription: any;
+  subscriptionDialog: any;
 
   constructor(
     private dateHandler: DateHandlerService,
@@ -51,7 +51,7 @@ export class WeekViewComponent implements OnInit, OnDestroy {
       panelClass: 'add-event-dialog-panelClass'
     });
 
-    this.subscription = dialogRef.afterClosed().subscribe(result => {
+    this.subscriptionDialog = dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
 

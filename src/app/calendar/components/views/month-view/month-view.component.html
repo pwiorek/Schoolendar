@@ -1,1 +1,48 @@
-<h1>Coming soon!</h1>
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>
+          <div *ngIf="isSmallScreen; else elseMonday">Mon</div>
+          <ng-template #elseMonday>Monday</ng-template>
+        </th>
+        <th>
+          <div *ngIf="isSmallScreen; else elseTuesday ">Tue</div>
+          <ng-template #elseTuesday>Tuesday</ng-template>
+        </th>
+        <th>
+          <div *ngIf="isSmallScreen; else elseWednesday">Wed</div>
+          <ng-template #elseWednesday>Wednesday</ng-template>
+        </th>
+        <th>
+          <div *ngIf="isSmallScreen; else elseThursday">Thu</div>
+          <ng-template #elseThursday>Thursday</ng-template>
+        </th>
+        <th>
+          <div *ngIf="isSmallScreen; else elseFriday">Fri</div>
+          <ng-template #elseFriday>Friday</ng-template>
+        </th>
+        <th>
+          <div *ngIf="isSmallScreen; else elseSaturday">Sat</div>
+          <ng-template #elseSaturday>Saturday</ng-template>
+        </th>
+        <th>
+          <div *ngIf="isSmallScreen; else elseSunday">Sun</div>
+          <ng-template #elseSunday>Sunday</ng-template>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of daysGroupedIntoRows">
+        <td *ngFor="let day of row" [class.otherMonth]="day.getMonth() != currentMonth"
+          [class.weekend]="day.getDay() === 0 || day.getDay() === 6"
+          [class.today]="day.getFullYear() === today.getFullYear() && day.getMonth() === today.getMonth() && day.getDate() === today.getDate()"
+          (click)="openDialog(day)">
+          <div class="number-of-day">
+            {{ day | date:'d' }}
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
