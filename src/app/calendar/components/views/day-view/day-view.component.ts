@@ -4,6 +4,7 @@ import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { CalendarViewMenuService } from 'src/app/calendar/services/calendar-view-menu.service';
 import { TimePeriodService } from '../../time-period-controler/time-period.service';
 
+
 @Component({
   selector: 'app-day-view',
   templateUrl: './day-view.component.html',

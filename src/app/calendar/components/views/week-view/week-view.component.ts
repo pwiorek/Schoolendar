@@ -40,7 +40,7 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   }
 
   handleSwipe(side: string) {
-    if (side == 'left') this.dateHandler.moveForwards(7);
-    else if (side == 'right') this.dateHandler.moveBackwards(7);
+    if (side === 'left') this.dateHandler.moveForwards(7);
+    else if (side === 'right') this.dateHandler.moveBackwards(7);
   }
 }
