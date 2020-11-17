@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
+import { Event } from '../../../services/event';
 import { EventHandlingService } from '../../../services/event-handling.service';
 import { AddEventDialog } from '../../add-event/add-event-dialog';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,20 +20,22 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   isSmallScreen = false;
   _subscription: any;
   subscriptionDialog: any;
+  events: Event[];
 
   constructor(
     private dateHandler: DateHandlerService,
     private breakpointObserver: BreakpointObserver,
-    private eventHandlingService: EventHandlingService,
+    public eventHandlingService: EventHandlingService,
     public dialog: MatDialog,
   ) {
-    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
-    this.days = this.dateHandler.currentWeek;
-    this._subscription = dateHandler.currentWeekChange.subscribe(value => this.days = value);
   }
 
   ngOnInit(): void {
     if(this.isSmallScreen) this.dayFormat = 'E'; 
+    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
+    this.days = this.dateHandler.currentWeek;
+    this._subscription = this.dateHandler.currentWeekChange.subscribe(value => this.days = value);
+    this.eventHandlingService.getEvents().subscribe(events => this.events = events);
   }  
 
   ngOnDestroy() {
@@ -56,4 +59,5 @@ export class WeekViewComponent implements OnInit, OnDestroy {
     });
 
   }
+
 }
