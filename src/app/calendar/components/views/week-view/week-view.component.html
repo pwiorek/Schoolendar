@@ -1,4 +1,4 @@
-<div *ngIf="this.eventHandlingService.events; else stillLoading">
+<div *ngIf="events; else stillLoading">
     <section class="grid-container">
         <article class="column-container constant hours-container">
             <li class="block-container constant"></li>
@@ -12,9 +12,9 @@
                 <p>{{ date | date: dayFormat }}</p>
             </div>
             <div class="block-container" *ngFor="let hour of hours" (click)="openDialog(hour, date)">
+                
             </div>
         </article>
-        {{events}}
     </section>
 </div>
 <ng-template #stillLoading><p>Loading...</p></ng-template>

@@ -35,7 +35,7 @@ export class WeekViewComponent implements OnInit, OnDestroy {
     this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
     this.days = this.dateHandler.currentWeek;
     this._subscription = this.dateHandler.currentWeekChange.subscribe(value => this.days = value);
-    this.eventHandlingService.getEvents().subscribe(events => this.events = events);
+    this.eventHandlingService.loadEvents().then(events => this.events = events);
   }  
 
   ngOnDestroy() {
