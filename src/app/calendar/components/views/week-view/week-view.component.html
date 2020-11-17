@@ -12,7 +12,9 @@
                 <p>{{ date | date: dayFormat }}</p>
             </div>
             <div class="block-container" *ngFor="let hour of hours" (click)="openDialog(hour, date)">
-                
+                <ng-container *ngFor="let event of events" >
+                    <li *ngIf="event.date === date.toDateString() && event.hour === hour">{{ event?.name  }}</li>
+                 </ng-container>
             </div>
         </article>
     </section>
