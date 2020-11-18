@@ -1,10 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
+import { Subscription } from 'rxjs';
+import { DateHandlerService } from 'src/app/services/date-handler.service';
+import { TimePeriodService } from '../../time-period-controler/time-period.service';
+import { CalendarViewMenuService } from 'src/app/calendar/services/calendar-view-menu.service';
+import { View } from 'src/app/calendar/services/viewEnum';
 import { AddEventDialog } from '../../add-event/add-event-dialog';
 import { MatDialog } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-month-view',
@@ -12,7 +16,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./month-view.component.scss']
 })
 export class MonthViewComponent implements OnInit, OnDestroy {
-  daysOfMonth: Date[] = [];
+  days: Date[] = [];
   daysToDisplay: Date[] = [];
   today = new Date();
   isSmallScreen = false;
@@ -23,12 +27,17 @@ export class MonthViewComponent implements OnInit, OnDestroy {
 
   constructor(
     private dateHandler: DateHandlerService,
+    private calendarViewMenu: CalendarViewMenuService,
+    private timePeriodService: TimePeriodService,
     private breakpointObserver: BreakpointObserver,
     public dialog: MatDialog,
   ) {
+    this.days = this.dateHandler.currentMonth;
+    this.subscription = dateHandler.currentMonthChange.subscribe(value => this.days = value);
   }
 
   ngOnInit(): void {
+    this.timePeriodService.setView(View.month);
     this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
     this.daysOfMonth = this.dateHandler.currentMonth;
     this.currentMonth = this.daysOfMonth[0].getMonth();

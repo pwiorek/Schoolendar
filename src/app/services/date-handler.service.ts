@@ -31,12 +31,14 @@ export class DateHandlerService {
     let listOfDays: Date[] = [];
     let day = new Date();
 
+    const normalizeDayIndex = 1;
+
     // get date of Monday
     if(referenceDate.getDay() >= 1) {
-      day = new Date(referenceDate.setDate(referenceDate.getDate() - referenceDate.getDay() + 1));
+      day = new Date(referenceDate.setDate(referenceDate.getDate() - referenceDate.getDay() + normalizeDayIndex));
     }
     else {
-      day = new Date(referenceDate.setDate(referenceDate.getDate() - 6)); 
+      day = new Date(referenceDate.setDate(referenceDate.getDate() - 7 + normalizeDayIndex)); 
     }
 
 
