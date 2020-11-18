@@ -12,7 +12,11 @@
                 </mat-form-field>
 
                 <mat-button-toggle-group name="type" aria-label="Event type" formControlName='type'>
-                    <mat-button-toggle value="exam">
+                    <mat-button-toggle *ngFor="let option of options" [value]="option">
+                        <mat-icon class="material-icons icon">{{ option | toTypeIcon}}</mat-icon>{{option}}
+                    </mat-button-toggle>
+                    
+                    <!-- <mat-button-toggle value="exam">
                         <mat-icon class="material-icons icon">report</mat-icon>Exam
                     </mat-button-toggle>
                     <mat-button-toggle value="quiz">
@@ -23,7 +27,7 @@
                     </mat-button-toggle>
                     <mat-button-toggle value="null">
                         <mat-icon class="material-icons icon">event</mat-icon>Other
-                    </mat-button-toggle>
+                    </mat-button-toggle> -->
                   </mat-button-toggle-group>
 
                 <mat-form-field appearance="outline" class="form-element">

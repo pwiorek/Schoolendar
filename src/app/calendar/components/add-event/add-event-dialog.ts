@@ -15,6 +15,7 @@ export class AddEventDialog implements OnInit {
   nameAlert: string = 'To pole jest wymagane, min. długość: 1 znak, max. długość 30 znaków.';
   dateAlert: string = 'To pole jest wymagane.';
   hours = this.eventHandlingService.hours;
+  options: Type[] = [Type.EXAM, Type.QUIZ, Type.HOMEWORK, Type.OTHER];
   
   constructor(
     public dialogRef: MatDialogRef<AddEventDialog>,

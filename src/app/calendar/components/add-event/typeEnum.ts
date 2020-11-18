@@ -1,6 +1,6 @@
 export enum Type {
-    exam = 'exam',
-    quiz = 'quiz',
-    homework = 'homework',
-    other = 'other'
+    EXAM = 'exam',
+    QUIZ = 'quiz',
+    HOMEWORK = 'homework',
+    OTHER = 'other'
 }
