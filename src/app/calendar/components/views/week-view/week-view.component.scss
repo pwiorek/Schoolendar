@@ -17,13 +17,13 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         .constant {
             color: #585858;
         }
 
-
-        h3, p {
+        h3,
+        p {
             margin: 0;
         }
     }
@@ -36,6 +36,29 @@
         .constant {
             background-color: #3f51b5;
             color: white;
+        }
+    }
+
+    .single-cell {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start !important;
+        align-items: flex-start ;
+
+        .single-event {
+            list-style-type: none;
+            background-color: #ff4c88;
+            display: block;
+            width: 95%;
+            height: 45%;
+            margin: 2px;
+            border: #ccc 1px solid;
+            border-radius: 5px;
+
+            .event-name {
+                color: white;
+                margin: 0 auto;
+            }
         }
     }
 

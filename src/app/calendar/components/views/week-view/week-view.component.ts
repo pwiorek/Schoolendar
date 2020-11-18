@@ -6,6 +6,7 @@ import { Event } from '../../../services/event';
 import { EventHandlingService } from '../../../services/event-handling.service';
 import { AddEventDialog } from '../../add-event/add-event-dialog';
 import { MatDialog } from '@angular/material/dialog';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-week-view',
@@ -20,7 +21,8 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   isSmallScreen = false;
   _subscription: any;
   subscriptionDialog: any;
-  events: Event[];
+  events: Event[] = [];
+  eventsChange: Subject<Event[]> = new Subject<Event[]>();
 
   constructor(
     private dateHandler: DateHandlerService,
@@ -35,29 +37,43 @@ export class WeekViewComponent implements OnInit, OnDestroy {
     this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
     this.days = this.dateHandler.currentWeek;
     this._subscription = this.dateHandler.currentWeekChange.subscribe(value => this.days = value);
-    this.eventHandlingService.loadEvents().then(events => this.events = events);
+    this._subscription.add(this.eventHandlingService.temporaryEventChange.subscribe(value => this.events.push(value)));
+    this.eventHandlingService.loadEvents().then(events => {
+      this.events = events
+      this.eventsChange.next(this.events)});
+    this._subscription.add(this.eventsChange.subscribe(value => this.events = value));
   }  
 
   ngOnDestroy() {
     this._subscription.unsubscribe();
   }
 
-  openDialog(hour: string, date: Date): void {
-    const dialogRef = this.dialog.open(AddEventDialog, {
-      data: {
-        name: "",
-        date: date,
-        hour: hour
-      },
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      panelClass: 'add-event-dialog-panelClass'
-    });
+  openDialog(hour: string, date: Date, target: any, currentTarget: any): void {
+    if (target === currentTarget) {
+      const dialogRef = this.dialog.open(AddEventDialog, {
+        data: {
+          name: "",
+          date: date,
+          hour: hour
+        },
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+        panelClass: 'add-event-dialog-panelClass'
+      });
+      
+      this.subscriptionDialog = dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        if(result) {
+          this.events.push(result);
+          this.eventsChange.next(this.events);
+        }
+      });
+    } 
+  }
 
-    this.subscriptionDialog = dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-
+  //can be used to open popup with event details in future
+  test(name:string) {
+    alert(name)
   }
 
 }

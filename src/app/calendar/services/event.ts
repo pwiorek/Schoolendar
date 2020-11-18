@@ -1,13 +1,13 @@
 export class Event {
     name: string;
-    date: Date;
+    date: string;
     hour: string;
     timeZone: number;
 
-    constructor(name: string, date: Date, hour: string) {
+    constructor(name: string, date: string, hour: string) {
         this.name = name;
         this.date = date;
         this.hour = hour;
-        this.timeZone = date.getTimezoneOffset();
+        this.timeZone = new Date(date).getTimezoneOffset();
     }
 }

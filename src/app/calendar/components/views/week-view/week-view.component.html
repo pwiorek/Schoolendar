@@ -1,23 +1,25 @@
-<div *ngIf="events; else stillLoading">
-    <section class="grid-container">
-        <article class="column-container constant hours-container">
-            <li class="block-container constant"></li>
-            <li class="block-container constant hour" *ngFor="let hour of hours">
-                <p>{{ hour }}</p>
-            </li>
-        </article>
-        <article class="column-container date-container" [class.today]="date.getFullYear() === today.getFullYear() && date.getMonth() === today.getMonth() && date.getDate() === today.getDate()" *ngFor="let date of days">
-            <div class="block-container constant">
-                <h3>{{ date | date: "dd" }}</h3>
-                <p>{{ date | date: dayFormat }}</p>
-            </div>
-            <div class="block-container" *ngFor="let hour of hours" (click)="openDialog(hour, date)">
-                <ng-container *ngFor="let event of events" >
-                    <li *ngIf="event.date === date.toDateString() && event.hour === hour">{{ event?.name  }}</li>
-                 </ng-container>
-            </div>
-        </article>
-    </section>
-</div>
-<ng-template #stillLoading><p>Loading...</p></ng-template>
-
+<section class="grid-container">
+    <article class="column-container constant hours-container">
+        <li class="block-container constant"></li>
+        <li class="block-container constant hour" *ngFor="let hour of hours">
+            <p>{{ hour }}</p>
+        </li>
+    </article>
+    <article class="column-container date-container"
+        [class.today]="date.getFullYear() === today.getFullYear() && date.getMonth() === today.getMonth() && date.getDate() === today.getDate()"
+        *ngFor="let date of days">
+        <div class="block-container constant">
+            <h3>{{ date | date: "dd" }}</h3>
+            <p>{{ date | date: dayFormat }}</p>
+        </div>
+        <div class="single-cell block-container" *ngFor="let hour of hours"
+            (click)="openDialog(hour, date, $event.target, $event.currentTarget)">
+            <ng-container *ngFor="let event of events">
+                <li class="single-event" *ngIf="event.date === date.toDateString() && event.hour === hour"
+                    (click)="test(event.name)">
+                    <div class="event-name">{{event?.name}}</div>
+                </li>
+            </ng-container>
+        </div>
+    </article>
+</section>
