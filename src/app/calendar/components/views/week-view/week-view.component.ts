@@ -6,6 +6,10 @@ import { CalendarViewMenuService } from 'src/app/calendar/services/calendar-view
 import { TimePeriodService } from '../../time-period-controler/time-period.service';
 import { View } from 'src/app/calendar/services/viewEnum';
 
+import { EventHandlingService } from '../../../services/event-handling.service';
+import { AddEventDialog } from '../../add-event/add-event-dialog';
+import { MatDialog } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-week-view',
   templateUrl: './week-view.component.html',
@@ -13,18 +17,20 @@ import { View } from 'src/app/calendar/services/viewEnum';
 })
 export class WeekViewComponent implements OnInit, OnDestroy {
   days: Date[] = [];
-  hours = ['7:10 - 7:55', '8:00 - 8:45', '9:50 - 10:35', '10:40 - 11:25', '11:30 - 12:15', '12:30 - 13:15',
-    '13:20 - 14:05', '14:10 - 14:55']; //in future from database
+  hours = this.eventHandlingService.hours;
   today = new Date();
   dayFormat = 'EEEE';
   isSmallScreen = false;
-  private subscription: Subscription
+  subscription: Subscription
+  subscriptionDialog: Subscription;
 
   constructor(
     private dateHandler: DateHandlerService,
     private breakpointObserver: BreakpointObserver,
     private calendarViewMenu: CalendarViewMenuService,
-    private timePeriodService: TimePeriodService
+    private timePeriodService: TimePeriodService,
+    private eventHandlingService: EventHandlingService,
+    public dialog: MatDialog,
   ) {
     this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
     this.days = this.dateHandler.currentWeek;
@@ -43,5 +49,23 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   handleSwipe(side: string) {
     if (side === 'left') this.dateHandler.moveForwards(7);
     else if (side === 'right') this.dateHandler.moveBackwards(7);
+  }
+
+  openDialog(hour: string, date: Date): void {
+    const dialogRef = this.dialog.open(AddEventDialog, {
+      data: {
+        name: "",
+        date: date,
+        hour: hour
+      },
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      panelClass: 'add-event-dialog-panelClass'
+    });
+
+    this.subscriptionDialog = dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+
   }
 }

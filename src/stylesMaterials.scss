@@ -1,0 +1,48 @@
+// file for styling elements from Angular Material
+
+// style for add-event-dialog on mobile view
+// (src\app\calendar\components\add-event\add-event-dialog.html)
+.add-event-dialog {
+  text-align: center;
+  width: 450px;
+  height: 500px;
+  position: relative;
+}
+
+mat-button-toggle-group .mat-button-toggle-label-content {
+  line-height: 36px !important;
+  cursor: pointer;
+  font-weight: 500;
+  color:  #3f51b5;
+}
+
+@media only screen and (max-width: 560px) {
+  .cdk-global-overlay-wrapper {
+    align-items: start !important;
+  }
+  .add-event-dialog-panelClass {
+    .add-event-dialog {
+      text-align: center;
+      width: 100vw;
+      height: 80vh;
+    }
+    .add-event-dialog-content {
+      display: inline-block;
+      width: 100vw;
+    }
+    .mat-dialog-container {
+      padding: 24px 0px;
+    }
+    #mat-dialog-title {
+      display: inline-block;
+    }
+    #mat-dialog-content {
+      padding: 0px;
+      width: 90vw;
+      margin: 5px;
+    }
+    #mat-button {
+      display: inline-block;
+    }
+  }
+}
