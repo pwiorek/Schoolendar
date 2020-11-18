@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { Subscription } from 'rxjs';
 import { TimePeriodService } from './time-period.service';
+import { View } from 'src/app/calendar/services/viewEnum';
 
 @Component({
   selector: 'app-time-period-controler',
@@ -12,7 +13,7 @@ export class TimePeriodControlerComponent implements OnDestroy {
   activeDate: Date;
   activeWeek: Date[] = [];
   activeMonth: Date[] = [];
-  activeView: string;
+  activeView: View;
 
   private dateSubscription: Subscription;
   private weekSubscription: Subscription;

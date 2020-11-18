@@ -4,6 +4,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
 import { CalendarViewMenuService } from 'src/app/calendar/services/calendar-view-menu.service';
 import { TimePeriodService } from '../../time-period-controler/time-period.service';
+import { View } from 'src/app/calendar/services/viewEnum';
 
 @Component({
   selector: 'app-week-view',
@@ -31,7 +32,7 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.timePeriodService.setView(this.calendarViewMenu.view);
+    this.timePeriodService.setView(View.week);
     if(this.isSmallScreen) this.dayFormat = 'E'; 
   }  
 

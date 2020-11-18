@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { CalendarViewMenuService } from 'src/app/calendar/services/calendar-view-menu.service';
 import { TimePeriodService } from '../../time-period-controler/time-period.service';
+import { View } from 'src/app/calendar/services/viewEnum';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class DayViewComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit(): void {
-    this.timePeriodService.setView(this.calendarViewMenu.view);
+    this.timePeriodService.setView(View.day);
   }
 
   ngOnDestroy() {
