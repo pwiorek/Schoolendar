@@ -16,7 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./month-view.component.scss']
 })
 export class MonthViewComponent implements OnInit, OnDestroy {
-  days: Date[] = [];
+  daysOfMonth: Date[] = [];
   daysToDisplay: Date[] = [];
   today = new Date();
   isSmallScreen = false;
@@ -27,22 +27,22 @@ export class MonthViewComponent implements OnInit, OnDestroy {
 
   constructor(
     private dateHandler: DateHandlerService,
-    private calendarViewMenu: CalendarViewMenuService,
     private timePeriodService: TimePeriodService,
     private breakpointObserver: BreakpointObserver,
     public dialog: MatDialog,
-  ) {
-    this.days = this.dateHandler.currentMonth;
-    this.subscription = dateHandler.currentMonthChange.subscribe(value => this.days = value);
-  }
+  ) {}
 
   ngOnInit(): void {
     this.timePeriodService.setView(View.month);
     this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
     this.daysOfMonth = this.dateHandler.currentMonth;
     this.currentMonth = this.daysOfMonth[0].getMonth();
-    this.subscription.add(this.dateHandler.currentMonthChange.subscribe(value => this.daysOfMonth = value));
     this.fillDaysToDisplay();
+    this.subscription.add(this.dateHandler.currentMonthChange.subscribe(value => {
+      this.daysOfMonth = value;
+      this.currentMonth = this.daysOfMonth[0].getMonth();
+      this.fillDaysToDisplay();
+    }));
   }
 
   ngOnDestroy() {
@@ -50,6 +50,7 @@ export class MonthViewComponent implements OnInit, OnDestroy {
   }
 
   fillDaysToDisplay(): void {
+    this.daysToDisplay = [];
     const firstDay: number = this.daysOfMonth[0].getDay() === 0 ? 7 : this.daysOfMonth[0].getDay();
     //getting days from previous month to fill the first row when the first day of month is not Monday 
     for (let i = (firstDay - 1); i > 0; i--) {
@@ -101,6 +102,15 @@ export class MonthViewComponent implements OnInit, OnDestroy {
     this.subscription.add(dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     }));
+  }
+
+  handleSwipe(side: string) {
+    if (this.isSmallScreen) {
+      let num = this.daysOfMonth[this.daysOfMonth.length - 1].getDate();
+
+      if (side === 'left') this.dateHandler.moveForwards(num);
+      else if (side === 'right') this.dateHandler.moveBackwards(num);
+    }
   }
 
 }

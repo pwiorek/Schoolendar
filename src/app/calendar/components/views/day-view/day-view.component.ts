@@ -19,13 +19,12 @@ export class DayViewComponent implements OnInit, OnDestroy {
     private dateHandler: DateHandlerService,
     private calendarViewMenu: CalendarViewMenuService,
     private timePeriodService: TimePeriodService
-  ) {
-    this.day = this.dateHandler.currentDate;
-    this.subscription = dateHandler.currentDateChange.subscribe(value => this.day = value);
-   }
+  ) {}
 
   ngOnInit(): void {
     this.timePeriodService.setView(View.day);
+    this.day = this.dateHandler.currentDate;
+    this.subscription = this.dateHandler.currentDateChange.subscribe(value => this.day = value);
   }
 
   ngOnDestroy() {
