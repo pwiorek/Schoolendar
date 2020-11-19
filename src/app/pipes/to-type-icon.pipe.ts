@@ -8,11 +8,11 @@ export class ToTypeIconPipe implements PipeTransform {
 
   transform(value: Type): string {
     switch(value) {
-      case     'exam': return 'report';
-      case     'quiz': return 'school';
-      case 'homework': return 'home_work';
-      case    'other': return 'event';
-      default:         return 'error';
+      case     Type.EXAM: return 'report';
+      case     Type.QUIZ: return 'school';
+      case Type.HOMEWORK: return 'home_work';
+      case    Type.OTHER: return 'event';
+      default:            return 'error';
     }
   }
 }
