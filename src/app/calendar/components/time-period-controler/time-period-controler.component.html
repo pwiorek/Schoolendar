@@ -1,12 +1,12 @@
 <div class="container">
     <button class="material-icons arrow left" (click)='changeHandler("left")'>chevron_left</button>
-    <span *ngIf='activeView === "day"'>
+    <span *ngIf='activeView === "day"' class="text-container" id="day">
         {{ activeDate | date: "dd LLLL yyyy" }}
     </span>
-    <span *ngIf='activeView === "week"'>
+    <span *ngIf='activeView === "week"' class="text-container" id="week">
         {{ activeWeek[0] | date: "dd" }} - {{ activeWeek[activeWeek.length - 1] | date: "dd" }} {{ activeWeek[0] | date: "LLLL yyyy" }} 
     </span>
-    <span *ngIf='activeView === "month"'>
+    <span *ngIf='activeView === "month"' class="text-container" id="month">
         {{ activeMonth[0] | date: "LLLL yyyy" }} 
     </span>
     <button class="material-icons arrow right" (click)='changeHandler("right")'>chevron_right</button>
