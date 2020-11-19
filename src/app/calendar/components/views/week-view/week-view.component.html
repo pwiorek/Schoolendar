@@ -1,4 +1,4 @@
-<section class="grid-container">
+<section class="grid-container" (swipeleft)="handleSwipe('left')" (swiperight)="handleSwipe('right')">
     <article class="column-container constant hours-container">
         <li class="block-container constant"></li>
         <li class="block-container constant hour" *ngFor="let hour of hours">

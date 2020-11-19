@@ -1,0 +1,51 @@
+table {
+    border: 1px solid #585858;
+    border-spacing: 0px;
+    width: 100%;
+    height: 700px;
+}
+
+th {
+    width: 14.3%;
+    border: 1px solid #585858;
+    color: #585858;
+}
+
+td {
+    border: 1px solid #585858;
+    width: 14.3%;
+    text-align: center;
+    vertical-align: top;
+}
+
+.weekend {
+    background-color: rgb(230, 230, 230);
+}
+
+.number-of-day {
+    margin-top: 5px;
+    width: 100%;
+    font-weight: 700;
+    font-size: 16px;
+    color: #585858;
+}
+
+.otherMonth {
+    .number-of-day {
+        color: rgb(179, 179, 179);
+    }
+}
+
+.today {
+    background-color:  lighten(#3f51b5, 35%);
+}
+
+@media only screen and (max-width: 560px) {
+    table {
+        height: 600px;
+    }
+    .number-of-day {
+        margin-top: 3px;
+        font-size: smaller;
+    }
+}
