@@ -10,6 +10,7 @@ import { EventHandlingService } from '../../../services/event-handling.service';
 import { AddEventDialog } from '../../add-event/add-event-dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
+import { Type } from '../../add-event/typeEnum';
 
 @Component({
   selector: 'app-week-view',
@@ -26,6 +27,7 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   subscriptionDialog: Subscription;
   events: Event[] = [];
   eventsChange: Subject<Event[]> = new Subject<Event[]>();
+  options: Type[] = [Type.EXAM, Type.QUIZ, Type.HOMEWORK, Type.OTHER];
 
   constructor(
     private dateHandler: DateHandlerService,
