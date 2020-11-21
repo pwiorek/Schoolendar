@@ -17,7 +17,7 @@
             <ng-container *ngFor="let event of events">
                 <li class="single-event" *ngIf="event.date === date.toDateString() && event.hour === hour"
                     (click)="test(event.name)">
-                    <div class="event-name">{{event?.name}}</div>
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">announcement</mat-icon>
                 </li>
             </ng-container>
         </div>
