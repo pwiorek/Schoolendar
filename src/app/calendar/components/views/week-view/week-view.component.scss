@@ -2,6 +2,25 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     margin: 5px;
+    /* width */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: white;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: lighten(#3f51b5, 20%);
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #3f51b5;
+    }
 
     .column-container {
         height: 700px;
@@ -17,13 +36,13 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         .constant {
             color: #585858;
         }
 
-
-        h3, p {
+        h3,
+        p {
             margin: 0;
         }
     }
@@ -39,9 +58,43 @@
         }
     }
 
+    .single-cell {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start !important;
+        align-items: flex-start;
+        max-height: 100%;
+        overflow: auto;
+
+        .single-event {
+            list-style-type: none;
+            background-color: #ff4c88;
+            display: block;
+            width: 95%;
+            height: 45%;
+            margin: 2px;
+            border: #ccc 1px solid;
+            border-radius: 5px;
+
+            .icon {
+                display: block;
+                margin: 0 auto;
+                margin-right: 5px;
+            }
+        }
+    }
+
     @media only screen and (max-width: 560px) {
         .hour {
             font-size: smaller;
+        }
+        .icon {
+            font-size: 18px;
+            margin: 0 auto;
+            margin-right: 0px !important;
+        }
+        ::-webkit-scrollbar {
+            width: 3px;
         }
     }
 }

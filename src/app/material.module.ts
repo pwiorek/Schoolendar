@@ -10,7 +10,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 
-
 @NgModule({
   imports: [
     MatButtonModule,
@@ -22,7 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatSelectModule,
     MatFormFieldModule,
     MatButtonToggleModule,
-    MatIconModule,
+    MatIconModule
   ],
   exports: [
     MatButtonModule,
@@ -34,7 +33,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatSelectModule,
     MatFormFieldModule,
     MatButtonToggleModule,
-    MatIconModule,
+    MatIconModule
   ]
 })
 export class MaterialModule {}

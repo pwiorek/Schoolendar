@@ -14,8 +14,7 @@ export class AddEventComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    public eventHandlingService: EventHandlingService //only to create service instance
-    // when view != week; will be deleted in future
+    public eventHandlingService: EventHandlingService
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +38,9 @@ export class AddEventComponent implements OnInit {
 
     this.subscription = dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      if (result) {
+        this.eventHandlingService.addedByButton(result);
+      }
     });
 
   }

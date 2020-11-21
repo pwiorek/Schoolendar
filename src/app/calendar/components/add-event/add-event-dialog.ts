@@ -65,7 +65,8 @@ export class AddEventDialog implements OnInit {
   }
 
   onSubmit(post) {
-    this.eventHandlingService.addEvent(new Event(post.name, new Date(post.date), post.hour, post.type));
+    this.eventHandlingService.addEvent(new Event(post.name, new Date(post.date).toDateString(), post.hour, post.type));
+    this.dialogRef.close(new Event(post.name, new Date(post.date).toDateString(), post.hour, post.type));
   }
 
 }
