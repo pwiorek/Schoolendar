@@ -24,7 +24,8 @@ export class EventHandlingService {
       name: event.name,
       date: event.date,
       hour: event.hour,
-      timeZone: event.timeZone
+      timeZone: event.timeZone,
+      type: event.type,
     });
   }
 

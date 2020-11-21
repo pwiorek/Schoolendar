@@ -15,13 +15,15 @@ import { AddEventDialog } from './calendar/components/add-event/add-event-dialog
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { TodayButtonComponent } from './calendar/components/today-button/today-button.component';
 import { MaterialModule } from './material.module';
-
+import { TimePeriodControlerComponent } from './calendar/components/time-period-controler/time-period-controler.component';
+import { HammerModule } from '@angular/platform-browser';
 
 import * as firebase from 'firebase/app';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
+import { ToTypeIconPipe } from './pipes/to-type-icon.pipe';
 
 
 var firebaseConfig = {
@@ -47,11 +49,15 @@ firebase.initializeApp(firebaseConfig);
     AddEventComponent,
     AddEventDialog,
     TodayButtonComponent,
+    ToTypeIconPipe,
+    TimePeriodControlerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MaterialModule,
+    HammerModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(firebaseConfig),

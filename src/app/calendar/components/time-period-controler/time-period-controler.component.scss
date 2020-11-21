@@ -5,12 +5,38 @@
     justify-content: center;
 }
 
-p {
-    margin: 0;
-    height: 24px;
+.text-container {
+    text-align: center;
+}
+
+#day {
+    width: 9em;
+}
+
+#week {
+    width: 12em;
+}
+
+#month {
+    width: 7.5em;
 }
 
 .arrow {
-    height: 24px;
+    border: none;
+    background-color: inherit;
+    transition: transform 1s;
+}
+
+.left:hover {
     cursor: pointer;
+    transform: translateX(-4px);
+}
+
+.right:hover {
+    cursor: pointer;
+    transform: translateX(4px);
+}
+
+.arrow:focus {
+    outline: 0;
 }

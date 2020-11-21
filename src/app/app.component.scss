@@ -24,6 +24,9 @@
 
 .timePeriod {
     grid-area: timePeriod; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .today {
@@ -57,6 +60,10 @@
         bottom: 10px;
         left: 50%;
         right: 50%;
+    }
+
+    .timePeriod {
+        display: none; 
     }
 
     .today {

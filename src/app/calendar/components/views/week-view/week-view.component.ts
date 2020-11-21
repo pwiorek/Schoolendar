@@ -1,6 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DateHandlerService } from 'src/app/services/date-handler.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { Subscription } from 'rxjs';
+import { TimePeriodService } from '../../time-period-controler/time-period.service';
+import { View } from 'src/app/calendar/services/viewEnum';
 
 import { Event } from '../../../services/event';
 import { EventHandlingService } from '../../../services/event-handling.service';
@@ -19,24 +22,28 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   today = new Date();
   dayFormat = 'EEEE';
   isSmallScreen = false;
-  _subscription: any;
-  subscriptionDialog: any;
+  _subscription: Subscription;
+  subscriptionDialog: Subscription;
   events: Event[] = [];
   eventsChange: Subject<Event[]> = new Subject<Event[]>();
 
   constructor(
     private dateHandler: DateHandlerService,
     private breakpointObserver: BreakpointObserver,
-    public eventHandlingService: EventHandlingService,
+    private timePeriodService: TimePeriodService,
+    private eventHandlingService: EventHandlingService,
     public dialog: MatDialog,
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
-    if(this.isSmallScreen) this.dayFormat = 'E'; 
     this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
     this.days = this.dateHandler.currentWeek;
     this._subscription = this.dateHandler.currentWeekChange.subscribe(value => this.days = value);
+    this.timePeriodService.setView(View.week);
+    if(this.isSmallScreen) this.dayFormat = 'E'; 
+    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
+    this.days = this.dateHandler.currentWeek;
+    this._subscription.add(this.dateHandler.currentWeekChange.subscribe(value => this.days = value));
     this._subscription.add(this.eventHandlingService.temporaryEventChange.subscribe(value => this.events.push(value)));
     this.eventHandlingService.loadEvents().then(events => {
       this.events = events
@@ -46,6 +53,13 @@ export class WeekViewComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._subscription.unsubscribe();
+  }
+
+  handleSwipe(side: string) {
+    if (this.isSmallScreen) {
+      if (side === 'left') this.dateHandler.moveForwards(7);
+      else if (side === 'right') this.dateHandler.moveBackwards(7);
+    }
   }
 
   openDialog(hour: string, date: Date, target: any, currentTarget: any): void {

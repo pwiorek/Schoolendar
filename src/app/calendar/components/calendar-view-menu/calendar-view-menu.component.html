@@ -1,8 +1,8 @@
 <mat-button-toggle-group name="viewMenu">
-    <mat-button-toggle (click)="changeView('day')" [checked]="calendarViewMenuService.lastView === 'day'">DAY
+    <mat-button-toggle (click)="changeView('day')" [checked]="calendarViewMenuService.lastView === 'day'" style="color: #3f51b5">DAY
     </mat-button-toggle>
-    <mat-button-toggle (click)="changeView('week')" [checked]="calendarViewMenuService.lastView === 'week'">WEEK
+    <mat-button-toggle (click)="changeView('week')" [checked]="calendarViewMenuService.lastView === 'week'" style="color: #3f51b5">WEEK
     </mat-button-toggle>
-    <mat-button-toggle (click)="changeView('month')" [checked]="calendarViewMenuService.lastView === 'month'">MONTH
+    <mat-button-toggle (click)="changeView('month')" [checked]="calendarViewMenuService.lastView === 'month'" style="color: #3f51b5" >MONTH
     </mat-button-toggle>
 </mat-button-toggle-group>

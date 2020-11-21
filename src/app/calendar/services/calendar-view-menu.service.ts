@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { View } from './viewEnum';
 import { Router } from "@angular/router";
+
+import { View } from './viewEnum';
+
 
 @Injectable({
   providedIn: 'root'
