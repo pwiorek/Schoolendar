@@ -43,9 +43,6 @@ export class WeekViewComponent implements OnInit, OnDestroy {
     this._subscription = this.dateHandler.currentWeekChange.subscribe(value => this.days = value);
     this.timePeriodService.setView(View.week);
     if(this.isSmallScreen) this.dayFormat = 'E'; 
-    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
-    this.days = this.dateHandler.currentWeek;
-    this._subscription.add(this.dateHandler.currentWeekChange.subscribe(value => this.days = value));
     this._subscription.add(this.eventHandlingService.temporaryEventChange.subscribe(value => this.events.push(value)));
     this.eventHandlingService.loadEvents().then(events => {
       this.events = events
@@ -90,6 +87,10 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   //can be used to open popup with event details in future
   test(name:string) {
     alert(name)
+  }
+
+  getShortISODate(date: Date): string {
+    return date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
   }
 
 }
