@@ -127,5 +127,10 @@
       }
     }
   },
-  "defaultProject": "schoolendar-app"
+  "defaultProject": "schoolendar-app",
+  "cli": {
+    "warnings": {
+      "versionMismatch": false
+    }
+  }
 }
