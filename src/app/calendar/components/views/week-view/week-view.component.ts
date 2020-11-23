@@ -44,9 +44,10 @@ export class WeekViewComponent implements OnInit, OnDestroy {
     this.timePeriodService.setView(View.week);
     if(this.isSmallScreen) this.dayFormat = 'E'; 
     this._subscription.add(this.eventHandlingService.temporaryEventChange.subscribe(value => this.events.push(value)));
-    this.eventHandlingService.loadEvents().then(events => {
+    this.eventHandlingService.loadEvents(new Date(this.days[0].setHours(0, 0, 0)), new Date(this.days[this.days.length - 1].setHours(23, 59, 59))).then(events => {
       this.events = events
-      this.eventsChange.next(this.events)});
+      this.eventsChange.next(this.events)})
+        .catch(e => console.log(e));
     this._subscription.add(this.eventsChange.subscribe(value => this.events = value));
   }  
 
@@ -89,8 +90,13 @@ export class WeekViewComponent implements OnInit, OnDestroy {
     alert(name)
   }
 
+  //used in HTML to convert into correct form
   getShortISODate(date: Date): string {
     return date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+  }
+
+  xd() {
+    // this.eventHandlingService.fetchEventsForWeek();
   }
 
 }

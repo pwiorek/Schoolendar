@@ -19,6 +19,7 @@ import { TimePeriodControlerComponent } from './calendar/components/time-period-
 import { HammerModule } from '@angular/platform-browser';
 
 import * as firebase from 'firebase/app';
+import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -63,6 +64,7 @@ firebase.initializeApp(firebaseConfig);
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule, // database
     AngularFireAuthModule, // auth
+    AngularFirestoreModule,
     MaterialModule
   ],
   providers: [DatePipe],
