@@ -88,14 +88,13 @@ export class WeekViewComponent implements OnInit, OnDestroy {
     } 
   }
 
-  details(name: string, date: string, hour: string, type: Type): void {
-    console.log(type);
+  openDetails(event: Event): void {
     const dialogRef = this.dialog.open(EventDetailsComponent, {
       data: {
-        name: name,
-        date: date,
-        hour: hour,
-        type: type
+        name: event.name,
+        date: event.date,
+        hour: event.hour,
+        type: event.type
       },
       maxWidth: '100vw',
       maxHeight: '100vh',

@@ -1,6 +1,7 @@
 .event-details-date {
     margin-bottom: 10px;
-    h1, h3 {
+    h1,
+    h3 {
         margin: 0 auto;
     }
 }
@@ -12,14 +13,17 @@ hr {
 }
 
 .event-details-group {
+
     .event-details-name {
         display: inline;
         float: left;
     }
+    
     .event-details-hour {
         display: inline;
         float: right;
     }
+
     .event-details-type {
         float: left;
         display: flex;
@@ -28,6 +32,7 @@ hr {
         padding: 3px;
         border-radius: 8px;
         align-items: center;
+        
         p {
             display: inline-block;
             margin: 0px;
