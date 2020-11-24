@@ -16,7 +16,7 @@
             (click)="openDialog(hour, date, $event.target, $event.currentTarget)">
             <ng-container *ngFor="let event of events">
                 <li class="single-event" *ngIf="event.date === date.toDateString() && event.hour === hour">
-                    <mat-icon class="material-icons icon" (click)="test(event.name)">{{ event.type | toTypeIcon }}
+                    <mat-icon class="material-icons icon" (click)="details(event.name, event.date, event.hour, event.type)">{{ event.type | toTypeIcon }}
                     </mat-icon>
                 </li>
             </ng-container>

@@ -1,0 +1,17 @@
+<div class="event-details-dialog">
+    <div class="event-details-date">
+        <h1>{{ data.date | date: "dd MMMM" }}</h1>
+        <h3>{{ data.date  | date: "EEEE" }}</h3>
+    </div>
+    <div class="event-details-group">
+        <div class="event-details-name"><p>{{data.name}}</p></div>
+        <div class="event-details-hour"><p>{{data.hour}}</p></div>
+        <hr>
+        <div class="event-details-type">
+            <mat-icon>{{ data.type | toTypeIcon }}</mat-icon>
+            <p>{{ data.type }}</p>
+        </div>
+    </div>
+
+
+</div>

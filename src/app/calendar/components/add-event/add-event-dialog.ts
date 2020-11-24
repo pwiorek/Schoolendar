@@ -58,7 +58,7 @@ export class AddEventDialog implements OnInit {
   createForm() {
     this.formGroup = this.formBuilder.group({
       'name': [null, [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
-      'type': [null],
+      'type': [null, [Validators.required]],
       'date': [null, [Validators.required]],
       'hour': [null, [Validators.required]],
     });

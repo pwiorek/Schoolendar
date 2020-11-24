@@ -2,7 +2,7 @@
 
 // style for add-event-dialog on mobile view
 // (src\app\calendar\components\add-event\add-event-dialog.html)
-.add-event-dialog {
+.add-event-dialog, .event-details-dialog {
   text-align: center;
   width: 450px;
   height: 500px;
@@ -42,6 +42,22 @@ mat-button-toggle-group .mat-button-toggle-label-content {
     }
     #mat-button {
       display: inline-block;
+    }
+  }
+
+  .event-details-panelClass {
+    .event-details-dialog {
+      text-align: center;
+      width: 100vw;
+      height: 80vh;
+    }
+    .mat-dialog-container {
+      padding: 24px 0px;
+    }
+    .event-details-group {
+      padding: 0px;
+      width: 90vw;
+      margin: 0 auto;
     }
   }
 }

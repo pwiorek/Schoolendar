@@ -1,0 +1,36 @@
+.event-details-date {
+    margin-bottom: 10px;
+    h1, h3 {
+        margin: 0 auto;
+    }
+}
+
+hr {
+    display: block;
+    width: 100%;
+    border: 1px solid #ff4c88;
+}
+
+.event-details-group {
+    .event-details-name {
+        display: inline;
+        float: left;
+    }
+    .event-details-hour {
+        display: inline;
+        float: right;
+    }
+    .event-details-type {
+        float: left;
+        display: flex;
+        background-color: #ff4c88;
+        color: #ffffff;
+        padding: 3px;
+        border-radius: 8px;
+        align-items: center;
+        p {
+            display: inline-block;
+            margin: 0px;
+        }
+    }
+}
