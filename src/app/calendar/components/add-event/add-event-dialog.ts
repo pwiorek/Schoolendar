@@ -45,10 +45,6 @@ export class AddEventDialog implements OnInit {
     return this.formGroup.get('type') as FormControl;
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
     // Prevent Saturday and Sunday from being selected.
@@ -58,7 +54,7 @@ export class AddEventDialog implements OnInit {
   createForm() {
     this.formGroup = this.formBuilder.group({
       'name': [null, [Validators.required, Validators.minLength(1), Validators.maxLength(30)]],
-      'type': [null],
+      'type': [null, [Validators.required]],
       'date': [null, [Validators.required]],
       'hour': [null, [Validators.required]],
     });

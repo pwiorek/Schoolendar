@@ -11,6 +11,7 @@ import { AddEventDialog } from '../../add-event/add-event-dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { Type } from '../../add-event/typeEnum';
+import { EventDetailsComponent } from '../../event-details/event-details.component';
 
 @Component({
   selector: 'app-week-view',
@@ -60,7 +61,6 @@ export class WeekViewComponent implements OnInit, OnDestroy {
     this._subscription.add(this.eventHandlingService.temporaryEventChange.subscribe(value => this.events.push(value)));
     this.eventHandlingService.loadEvents(new Date(this.days[0].setHours(0, 0, 0)), new Date(this.days[this.days.length - 1].setHours(23, 59, 59))).then(events => {
       this.events = events;
-      console.log(this.events);
       this.eventsChange.next(this.events)})
         .catch(e => console.log(e));
     this._subscription.add(this.eventsChange.subscribe(value => this.events = value));
@@ -101,9 +101,21 @@ export class WeekViewComponent implements OnInit, OnDestroy {
     } 
   }
 
-  //can be used to open popup with event details in future
-  test(name:string) {
-    alert(name)
+  openDetails(event: Event): void {
+    const dialogRef = this.dialog.open(EventDetailsComponent, {
+      data: {
+        name: event.name,
+        date: event.date,
+        hour: event.hour,
+        type: event.type
+      },
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      panelClass: 'event-details-panelClass'
+    });
+    
+    this.subscriptionDialog = dialogRef.afterClosed().subscribe(result =>
+      console.log('The dialog was closed'))      
   }
 
 }
