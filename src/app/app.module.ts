@@ -12,6 +12,7 @@ import { MonthViewComponent } from './calendar/components/views/month-view/month
 import { HomeComponent } from './calendar/home/home.component';
 import { AddEventComponent } from './calendar/components/add-event/add-event.component';
 import { AddEventDialog } from './calendar/components/add-event/add-event-dialog';
+import { EventDetailsComponent } from './calendar/components/event-details/event-details.component';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { TodayButtonComponent } from './calendar/components/today-button/today-button.component';
 import { MaterialModule } from './material.module';
@@ -51,6 +52,7 @@ firebase.initializeApp(firebaseConfig);
     TodayButtonComponent,
     ToTypeIconPipe,
     TimePeriodControlerComponent,
+    EventDetailsComponent
   ],
   imports: [
     BrowserModule,
