@@ -11,12 +11,13 @@ import { Event } from './event';
 })
 export class EventHandlingService {
   database = firebase.database();
-  newDatabase = firebase.firestore();
   eventsListRef = this.database.ref('events');
   hours = ['7:10 - 7:55', '8:00 - 8:45', '9:50 - 10:35', '10:40 - 11:25', '11:30 - 12:15', '12:30 - 13:15',
     '13:20 - 14:05', '14:10 - 14:55'];
   temporaryEvent: Event;
   temporaryEventChange: Subject<Event> = new Subject<Event>();
+  events: Event[];
+  eventsChange: Subject<Event[]> = new Subject<Event[]>();
 
 
   constructor() {}
@@ -34,11 +35,13 @@ export class EventHandlingService {
 
   async loadEvents(start: Date, end: Date): Promise<Event[]> {
     let events = await this.fetchEventsForTimePeriod(start, end);
+    this.events = events;
+    this.eventsChange.next(this.events);
     return events;
   }
 
-  fetchEvents(): Promise<Event[]> {
-    return new Promise((res, rej) => {
+  fetchAllEvents(): Promise<Event[]> {
+    return new Promise((res) => {
       
       this.eventsListRef.on('value', function(snapshot) {
         const events: Event[] = [];
@@ -52,8 +55,7 @@ export class EventHandlingService {
   }
   
   fetchEventsForTimePeriod(startDate: Date, endDate: Date): Promise<Event[]> {
-    console.log(startDate.getTime())
-    return new Promise((res, rej) => {
+    return new Promise((res) => {
       this.eventsListRef
         .orderByChild('date')
         .startAt(startDate.getTime())   
