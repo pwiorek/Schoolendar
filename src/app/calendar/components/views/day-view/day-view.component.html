@@ -1,5 +1,29 @@
-<h1>Coming soon!</h1>
-
-<div>
-    <p> {{ day }} </p>
-</div>
+<section class="day-container">
+    <table>
+        <thead>
+            <tr *ngIf="!isSmallScreen">
+                <th class="hours-column"></th>
+                <th class="data-column">
+                    <h3>{{ day | date: "dd" }}</h3>
+                    <p>{{ day | date: "EEEE" }}</p>
+                </th>
+            </tr>
+            <tr *ngIf="isSmallScreen">
+                <th class="data-column" colspan="2">
+                    <h3>{{ day | date: "dd" }}</h3>
+                    <p>{{ day | date: "EEEE" }}</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let hour of hours; let last = last">
+                <td class="hours-column " [class.hour-last]="last" >
+                    {{hour}}
+                </td>
+                <td class="data-column" [class.last]="last" >
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
