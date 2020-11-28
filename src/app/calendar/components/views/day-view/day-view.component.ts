@@ -35,4 +35,11 @@ export class DayViewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
+  handleSwipe(side: string) {
+    if (this.isSmallScreen) {
+      if (side === 'left') this.dateHandler.moveForwards(1);
+      else if (side === 'right') this.dateHandler.moveBackwards(1);
+    }
+  }
 }

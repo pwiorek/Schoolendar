@@ -1,4 +1,4 @@
-<section class="day-container">
+<section class="day-container" (swipeleft)="handleSwipe('left')" (swiperight)="handleSwipe('right')">
     <table>
         <thead>
             <tr *ngIf="!isSmallScreen">
