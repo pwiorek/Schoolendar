@@ -77,7 +77,7 @@ export class DateHandlerService {
 
 
   moveForwards( num: number) {
-    if (num == 1) {
+    if (num === 1) {
       if (this.currentDate.getDay() === 5) {
         num += 2;
       }
@@ -88,7 +88,7 @@ export class DateHandlerService {
   }
 
   moveBackwards(num: number) {
-    if (num == 1) {
+    if (num === 1) {
       if (this.currentDate.getDay() === 1) {
         num += 2;
       }
