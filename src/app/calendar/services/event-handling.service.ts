@@ -34,7 +34,7 @@ export class EventHandlingService {
   }
 
   async loadEvents(start: Date, end: Date): Promise<Event[]> {
-    let events = await this.fetchEventsForTimePeriod(start, end);
+    const events = await this.fetchEventsForTimePeriod(start, end);
     this.events = events;
     this.eventsChange.next(this.events);
     return events;
@@ -46,7 +46,7 @@ export class EventHandlingService {
       this.eventsListRef.on('value', function(snapshot) {
         const events: Event[] = [];
         snapshot.forEach(function(childSnapshot) {
-          let value = childSnapshot.val();
+          const value = childSnapshot.val();
           events.push(new Event(value.name, new Date(value.date), value.hour, value.type));
         })
         res(events);
@@ -63,7 +63,7 @@ export class EventHandlingService {
         .on('value', (snapshot) => {
           const events: Event[] = [];
           snapshot.forEach(childSnapshot => {
-            let value = childSnapshot.val();
+            const value = childSnapshot.val();
             events.push(new Event(value.name, new Date(value.date), value.hour, value.type));
           });
           res(events);
