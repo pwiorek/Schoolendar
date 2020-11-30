@@ -25,7 +25,6 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   dayFormat = 'EEEE';
   isSmallScreen = false;
   events: Event[] = [];
-  eventsChange: Subject<Event[]> = new Subject<Event[]>();
   options: Type[] = [Type.EXAM, Type.QUIZ, Type.HOMEWORK, Type.OTHER];
   _subscription: Subscription;
   subscriptionDialog: Subscription;
@@ -53,8 +52,8 @@ export class WeekViewComponent implements OnInit, OnDestroy {
     this.days = this.dateHandler.currentWeek;
     
     this._subscription = this.dateHandler.currentWeekChange.subscribe(value => {
-      this.days = value
-      this.loadEvents()
+      this.days = value;
+      this.loadEvents();
     });
     this._subscription.add(this.eventHandlingService.temporaryEventChange.subscribe(value => this.events.push(value)));
   }
@@ -63,11 +62,8 @@ export class WeekViewComponent implements OnInit, OnDestroy {
     const startDate = new Date(this.days[0].setHours(0, 0, 0));
     const endDate = new Date(this.days[this.days.length - 1].setHours(23, 59, 59));
 
-    this.eventHandlingService.loadEvents(startDate, endDate).then(events => {
-      this.events = events;
-      this.eventsChange.next(this.events)})
+    this.eventHandlingService.loadEvents(startDate, endDate).then(events => this.events = events)
         .catch(e => console.log(e));
-    this._subscription.add(this.eventsChange.subscribe(value => this.events = value));
   }
 
   smallScreenSetup() {
@@ -99,7 +95,7 @@ export class WeekViewComponent implements OnInit, OnDestroy {
         console.log('The dialog was closed');
         if(result) {
           this.events.push(result);
-          this.eventsChange.next(this.events);
+          // later add directly to DB
         }
       });
     } 
