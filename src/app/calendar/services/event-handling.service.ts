@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAction } from '@angular/fire/database';
+import { DataSnapshot } from '@angular/fire/database/interfaces';
+import { AngularFirestore, CollectionReference } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { Subject } from 'rxjs';
 import { Event } from './event';
@@ -13,37 +16,58 @@ export class EventHandlingService {
     '13:20 - 14:05', '14:10 - 14:55'];
   temporaryEvent: Event;
   temporaryEventChange: Subject<Event> = new Subject<Event>();
+  events: Event[];
+  eventsChange: Subject<Event[]> = new Subject<Event[]>();
 
-  constructor() {
-    this.loadEvents().then(events => console.log(events));    
-  }
+
+  constructor() {}
   
   addEvent(event: Event) {
     const newEventRef = this.eventsListRef.push();
     newEventRef.set({
       name: event.name,
-      date: event.date,
+      date: event.date.getTime(),
       hour: event.hour,
       timeZone: event.timeZone,
       type: event.type,
     });
   }
 
-  async loadEvents(): Promise<Event[]> {
-    const events = await this.fetchEvents();
+  async loadEvents(start: Date, end: Date): Promise<Event[]> {
+    const events = await this.fetchEventsForTimePeriod(start, end);
+    this.events = events;
+    this.eventsChange.next(this.events);
     return events;
   }
 
-  fetchEvents(): Promise<Event[]> {
-    return new Promise((res, rej) => {
+  fetchAllEvents(): Promise<Event[]> {
+    return new Promise((res) => {
       
       this.eventsListRef.on('value', function(snapshot) {
         const events: Event[] = [];
         snapshot.forEach(function(childSnapshot) {
-          events.push(childSnapshot.val())
+          const value = childSnapshot.val();
+          events.push(new Event(value.name, new Date(value.date), value.hour, value.type));
         })
         res(events);
       });
+    });
+  }
+  
+  fetchEventsForTimePeriod(startDate: Date, endDate: Date): Promise<Event[]> {
+    return new Promise((res) => {
+      this.eventsListRef
+        .orderByChild('date')
+        .startAt(startDate.getTime())   
+        .endAt(endDate.getTime())   
+        .on('value', (snapshot) => {
+          const events: Event[] = [];
+          snapshot.forEach(childSnapshot => {
+            const value = childSnapshot.val();
+            events.push(new Event(value.name, new Date(value.date), value.hour, value.type));
+          });
+          res(events);
+        })
     });
   }
 
@@ -52,5 +76,7 @@ export class EventHandlingService {
     this.temporaryEvent = event;
     this.temporaryEventChange.next(this.temporaryEvent);
   }
+
+  
 
 }
