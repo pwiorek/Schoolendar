@@ -19,6 +19,14 @@ export class DateHandlerService {
    }
 
   setDate(referenceDate: Date) { 
+    if (referenceDate.getDay() === 0) {
+      referenceDate = new Date(referenceDate);
+      referenceDate.setDate(referenceDate.getDate() + 1);
+    }
+    if (referenceDate.getDay() === 6) {
+      referenceDate = new Date(referenceDate);
+      referenceDate.setDate(referenceDate.getDate() + 2);
+    }
     this.currentDate = referenceDate;
     this.currentDateChange.next(this.currentDate);
     
@@ -69,12 +77,22 @@ export class DateHandlerService {
 
 
   moveForwards( num: number) {
+    if (num === 1) {
+      if (this.currentDate.getDay() === 5) {
+        num += 2;
+      }
+    }
     let day = new Date(this.currentDate);
     day.setDate(day.getDate() + num);
     this.setDate(day);
   }
 
   moveBackwards(num: number) {
+    if (num === 1) {
+      if (this.currentDate.getDay() === 1) {
+        num += 2;
+      }
+    }
     let day = new Date(this.currentDate);
     day.setDate(day.getDate() - num);
     this.setDate(day);
