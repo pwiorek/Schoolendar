@@ -24,11 +24,10 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   today = new Date();
   dayFormat = 'EEEE';
   isSmallScreen = false;
+  events: Event[] = [];
+  options: Type[] = [Type.EXAM, Type.QUIZ, Type.HOMEWORK, Type.OTHER];
   _subscription: Subscription;
   subscriptionDialog: Subscription;
-  events: Event[] = [];
-  eventsChange: Subject<Event[]> = new Subject<Event[]>();
-  options: Type[] = [Type.EXAM, Type.QUIZ, Type.HOMEWORK, Type.OTHER];
 
   constructor(
     private dateHandler: DateHandlerService,
@@ -39,23 +38,37 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
-    this.days = this.dateHandler.currentWeek;
-    this._subscription = this.dateHandler.currentWeekChange.subscribe(value => this.days = value);
+    this.getDaysToDisplay();
+    this.dateHandler.setDate(this.dateHandler.currentDate); //force Subject of dateHandler.currentWeek to change
+    this.smallScreenSetup();
     this.timePeriodService.setView(View.week);
-    if(this.isSmallScreen) this.dayFormat = 'E'; 
-    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
-    this.days = this.dateHandler.currentWeek;
-    this._subscription.add(this.dateHandler.currentWeekChange.subscribe(value => this.days = value));
-    this._subscription.add(this.eventHandlingService.temporaryEventChange.subscribe(value => this.events.push(value)));
-    this.eventHandlingService.loadEvents().then(events => {
-      this.events = events
-      this.eventsChange.next(this.events)});
-    this._subscription.add(this.eventsChange.subscribe(value => this.events = value));
   }  
 
   ngOnDestroy() {
     this._subscription.unsubscribe();
+  }
+
+  getDaysToDisplay() {
+    this.days = this.dateHandler.currentWeek;
+    
+    this._subscription = this.dateHandler.currentWeekChange.subscribe(value => {
+      this.days = value;
+      this.loadEvents();
+    });
+    this._subscription.add(this.eventHandlingService.temporaryEventChange.subscribe(value => this.events.push(value)));
+  }
+
+  private loadEvents() {
+    const startDate = new Date(this.days[0].setHours(0, 0, 0));
+    const endDate = new Date(this.days[this.days.length - 1].setHours(23, 59, 59));
+
+    this.eventHandlingService.loadEvents(startDate, endDate).then(events => this.events = events)
+        .catch(e => console.log(e));
+  }
+
+  smallScreenSetup() {
+    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 560px)');
+    if(this.isSmallScreen) this.dayFormat = 'E'; 
   }
 
   handleSwipe(side: string) {
@@ -82,7 +95,7 @@ export class WeekViewComponent implements OnInit, OnDestroy {
         console.log('The dialog was closed');
         if(result) {
           this.events.push(result);
-          this.eventsChange.next(this.events);
+          // later add directly to DB
         }
       });
     } 
