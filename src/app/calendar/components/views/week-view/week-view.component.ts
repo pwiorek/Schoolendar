@@ -59,7 +59,7 @@ export class WeekViewComponent implements OnInit, OnDestroy {
   }
 
   private loadEvents() {
-    const startDate = new Date(this.days[0].setHours(0, 0, 0));
+    const startDate = new Date(this.days[0].setHours(0, 0, 0, 0));
     const endDate = new Date(this.days[this.days.length - 1].setHours(23, 59, 59));
 
     this.eventHandlingService.loadEvents(startDate, endDate).then(events => this.events = events)
