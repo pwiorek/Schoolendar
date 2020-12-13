@@ -14,7 +14,7 @@ export class AddEventDialog implements OnInit {
   formGroup: FormGroup;
   nameAlert: string = 'To pole jest wymagane, min. długość: 1 znak, max. długość 30 znaków.';
   dateAlert: string = 'To pole jest wymagane.';
-  hours = this.eventHandlingService.hours;
+  hours = this.eventHandlingService.timetable.hours;
   options: Type[] = [Type.EXAM, Type.QUIZ, Type.HOMEWORK, Type.OTHER];
   
   constructor(
