@@ -3,8 +3,8 @@ export class Timetable {
     '13:20 - 14:05', '14:10 - 14:55'];
     monday = ['polski','matma','matma','angielski','his','wf','wf',''];
     tuesday = ['wf','wf','','his','informatyka','geografia','','niemiecki'];
-    wednesday = ['biologia','chemia','poslki','polski','matma','matma','angielski','chemia'];
-    thursday = ['','','niemiecki','angielski','','geografia','matma',''];
+    wednesday = ['biologia','chemia','polski','polski','matma','matma','angielski','chemia'];
+    thursday = ['','','niemiecki','angielski','utk','geografia','matma',''];
     friday = ['matma','fizyka','','fizyka','wf','informatyka','his','his'];
     days = [this.monday, this.tuesday, this.wednesday, this.thursday, this.friday];
 }

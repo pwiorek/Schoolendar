@@ -59,28 +59,54 @@
     }
 
     .single-cell {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start !important;
-        align-items: flex-start;
         max-height: 100%;
         overflow: auto;
+        .single-cell-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center !important;
+            align-items: flex-start;
+            width: 100%;
+            height: 100%;
+            position: relative;
 
-        .single-event {
-            list-style-type: none;
-            background-color: #ff4c88;
-            display: block;
-            width: 95%;
-            height: 45%;
-            margin: 2px;
-            border: #ccc 1px solid;
-            border-radius: 5px;
+            .lesson-name {
+                display: flex;
+                width: 100%;
+                height: 100%;
+                align-items: center;
+                justify-content: center;
 
-            .icon {
-                display: block;
-                margin: 0 auto;
-                margin-right: 5px;
-                cursor: pointer;
+                p {
+                    position: absolute;
+                    left: 0px;
+                    right: 0px;
+                    z-index: -1;
+                }
+            }
+
+            .lesson-events {
+                display: flex;
+                width: 35px;
+                height: 100%;
+                flex-direction: column;
+                justify-content: flex-start !important;
+                align-items: center;
+                max-height: 100%;
+                overflow: auto;
+                .single-event {
+                    list-style-type: none;
+                    display: block;
+                    width: auto;
+                    height: auto;
+                    .icon {
+                        display: block;
+                        color: #ff4c88;
+                        margin: 0 auto;
+                        margin-right: 5px;
+                        cursor: pointer;
+                    }
+                }
             }
         }
     }
@@ -96,6 +122,17 @@
         }
         ::-webkit-scrollbar {
             width: 3px;
+        }
+        div.lesson-name p {
+            font-size: x-small;
+            transform: rotate(-90deg);
+        }
+
+        .lesson-events {            
+            .mat-icon {
+                width: auto;
+                height: auto;
+            }
         }
     }
 }
