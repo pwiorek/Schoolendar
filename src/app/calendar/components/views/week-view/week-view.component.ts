@@ -20,7 +20,8 @@ import { EventDetailsComponent } from '../../event-details/event-details.compone
 })
 export class WeekViewComponent implements OnInit, OnDestroy {
   days: Date[] = [];
-  hours = this.eventHandlingService.hours;
+  hours = this.eventHandlingService.timetable.hours;
+  lessons = this.eventHandlingService.timetable.days;
   today = new Date();
   dayFormat = 'EEEE';
   isSmallScreen = false;

@@ -7,18 +7,28 @@
     </article>
     <article class="column-container date-container"
         [class.today]="date.getFullYear() === today.getFullYear() && date.getMonth() === today.getMonth() && date.getDate() === today.getDate()"
-        *ngFor="let date of days">
+        *ngFor="let date of days; let i = index">
         <div class="block-container constant">
             <h3>{{ date | date: "dd" }}</h3>
             <p>{{ date | date: dayFormat }}</p>
         </div>
-        <div class="single-cell block-container" *ngFor="let hour of hours"
-            (click)="openDialog(hour, date, $event.target, $event.currentTarget)">
-            <ng-container *ngFor="let event of events">
-                <li class="single-event" *ngIf="date.getFullYear() === event.date.getFullYear() && date.getMonth() === event.date.getMonth() && date.getDate() === event.date.getDate() && event.hour === hour">
-                    <mat-icon class="material-icons icon" (click)="openDetails(event)">{{ event.type | toTypeIcon }}</mat-icon>
-                </li>
-            </ng-container>
+        <div class="single-cell block-container" *ngFor="let hour of hours; let j = index"
+            >
+            <div class="single-cell-container">
+                <div class="lesson-name" (click)="openDialog(hour, date, $event.target, $event.currentTarget)">
+                    <p>{{lessons[i][j]}}</p>
+                </div>
+                <div class="lesson-events" (click)="openDialog(hour, date, $event.target, $event.currentTarget)">
+                    <ng-container *ngFor="let event of events">
+                        <li class="single-event"
+                            *ngIf="date.getFullYear() === event.date.getFullYear() && date.getMonth() === event.date.getMonth() && date.getDate() === event.date.getDate() && event.hour === hour">
+                            <mat-icon class="material-icons icon" (click)="openDetails(event)">{{ event.type |
+                                toTypeIcon }}
+                            </mat-icon>
+                        </li>
+                    </ng-container>
+                </div>
+            </div>
         </div>
     </article>
 </section>

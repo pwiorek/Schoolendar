@@ -14,7 +14,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 })
 export class DayViewComponent implements OnInit, OnDestroy {
   day: Date;
-  hours = this.eventHandlingService.hours;
+  hours = this.eventHandlingService.timetable.hours;
   private subscription: Subscription;
   isSmallScreen: boolean;
 
